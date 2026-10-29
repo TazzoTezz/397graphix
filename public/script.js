@@ -58,10 +58,18 @@ const LAB_CAPTIONS = {
 };
 
 if (labStage && labRange) {
+  const labDivider = $('#lab-divider');
+  const labClipLayers = $$('.lab-clip-layer', labStage);
   const updateSplit = () => {
-    labStage.style.setProperty('--split', `${labRange.value}%`);
+    const pct = `${labRange.value}%`;
+    labStage.style.setProperty('--split', pct);
+    if (labDivider) labDivider.style.left = pct;
+    labClipLayers.forEach((layer) => {
+      layer.style.clipPath = `inset(0 calc(100% - ${pct}) 0 0)`;
+    });
   };
   labRange.addEventListener('input', updateSplit);
+  updateSplit();
 
   labTabs.forEach((tab) => {
     tab.addEventListener('click', () => {
@@ -380,6 +388,22 @@ if (cfgModeBtns.length && cfgPanelVehicle && cfgPanelGlass) {
       vCanvas.style.setProperty('--stripe-color', vState.stripeHex);
       vCanvas.style.setProperty('--base-paint', vState.basePaintHex);
       vCanvas.style.setProperty('--mask-url', bodyInfo.maskUrl);
+    }
+
+    const vPaintMask = $('#v-paint-mask');
+    if (vPaintMask) {
+      vPaintMask.style.webkitMaskImage = bodyInfo.maskUrl;
+      vPaintMask.style.maskImage = bodyInfo.maskUrl;
+      vPaintMask.style.webkitMaskSize = '100% 100%';
+      vPaintMask.style.maskSize = '100% 100%';
+      vPaintMask.style.webkitMaskRepeat = 'no-repeat';
+      vPaintMask.style.maskRepeat = 'no-repeat';
+      vPaintMask.style.mixBlendMode = 'multiply';
+    }
+
+    const vBasePaintLayer = $('#v-base-paint-layer');
+    if (vBasePaintLayer) {
+      vBasePaintLayer.style.backgroundColor = vState.basePaintHex;
     }
 
     if (vStudioBase) {

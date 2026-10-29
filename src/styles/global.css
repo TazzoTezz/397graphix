@@ -368,3 +368,37 @@
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee { animation: none; }
 }
+
+/* Interactive Studio Slider & Vehicle Mask Rules (CSP-Safe Stylesheet Rules) */
+#lab-stage {
+  --split: 58%;
+}
+.lab-clip-layer {
+  clip-path: inset(0 calc(100% - var(--split, 58%)) 0 0);
+}
+#lab-divider {
+  left: var(--split, 58%);
+}
+.marquee-fade {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+#vehicle-canvas {
+  --wrap-color: #E11D48;
+  --stripe-color: #FFFFFF;
+  --base-paint: #3B4252;
+  --mask-url: url('/assets/img/vehicles/ute-mask.webp');
+}
+#v-paint-mask {
+  -webkit-mask-image: var(--mask-url, url('/assets/img/vehicles/ute-mask.webp'));
+  mask-image: var(--mask-url, url('/assets/img/vehicles/ute-mask.webp'));
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  mix-blend-mode: multiply;
+}
+#v-base-paint-layer {
+  background-color: var(--base-paint, #3B4252);
+}
+
