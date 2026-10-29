@@ -781,9 +781,16 @@ if (cfgModeBtns.length && cfgPanelVehicle && cfgPanelGlass) {
     vLogoUpload.addEventListener('change', () => {
       const file = vLogoUpload.files && vLogoUpload.files[0];
       if (!file) return;
+      const validTypes = ['image/png', 'image/jpeg', 'image/webp', 'image/svg+xml'];
+      if (!validTypes.includes(file.type) || file.size > 5 * 1024 * 1024) {
+        vLogoUpload.value = '';
+        return;
+      }
       const reader = new FileReader();
       reader.onload = () => {
-        vState.logoDataUrl = String(reader.result || '');
+        const res = String(reader.result || '');
+        if (!res.startsWith('data:image/')) return;
+        vState.logoDataUrl = res;
         if (vLogoImg) vLogoImg.src = vState.logoDataUrl;
         if (vLogoClearBtn) vLogoClearBtn.hidden = false;
         renderVehicle();
@@ -1011,7 +1018,6 @@ if (cfgModeBtns.length && cfgPanelVehicle && cfgPanelGlass) {
   const vDownloadBtn = $('#v-download-png-btn');
   if (vDownloadBtn) {
     vDownloadBtn.addEventListener('click', async () => {
-      const origText = vDownloadBtn.innerHTML;
       vDownloadBtn.textContent = 'Generating Studio Proof...';
       try {
         const dataUrl = await renderStudioProofDataUrl();
@@ -1022,7 +1028,7 @@ if (cfgModeBtns.length && cfgPanelVehicle && cfgPanelGlass) {
         a.click();
         a.remove();
       } finally {
-        vDownloadBtn.innerHTML = origText;
+        vDownloadBtn.textContent = 'Download Design Proof (.PNG)';
       }
     });
   }
@@ -1749,7 +1755,7 @@ if (form) {
       mailtoFallback(d);
     } finally {
       btn.disabled = false;
-      btn.innerHTML = '<span>Send Quote Request</span> <span aria-hidden="true">&rarr;</span>';
+      btn.textContent = 'Send Quote Request →';
     }
   });
 }
