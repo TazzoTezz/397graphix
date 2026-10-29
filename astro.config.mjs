@@ -1,11 +1,16 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from 'tailwindcss';
 
 export default defineConfig({
   site: 'https://397graphix.co.nz',
-  integrations: [tailwind({ applyBaseStyles: false })],
+  vite: {
+    css: {
+      postcss: {
+        plugins: [tailwindcss()],
+      },
+    },
+  },
   build: {
     format: 'directory',
   },
 });
-
