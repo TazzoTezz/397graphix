@@ -1,0 +1,370 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Archivo";
+  src: url("/assets/fonts/archivo-variable.woff2") format("woff2-variations"),
+       url("/assets/fonts/archivo-variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --volt: #E11D48;
+  --carbon: #08090C;
+  --panel: #111318;
+  --card: #161920;
+  --control: #1F242F;
+  --control-hover: #282F3D;
+  --border-subtle: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.24);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 96px;
+    background-color: var(--carbon);
+    color: #D1D5DB;
+    font-family: "Archivo", system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--carbon);
+    color: #D1D5DB;
+    overflow-x: hidden;
+  }
+
+  /* Major section display headings — bold and impactful without overflowing boxes */
+  .font-display {
+    font-family: "Archivo", sans-serif;
+    font-variation-settings: "wdth" 114, "wght" 850;
+    text-transform: uppercase;
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+  }
+
+  /* Clean, readable card & sub-headings */
+  .font-heading {
+    font-family: "Archivo", sans-serif;
+    font-variation-settings: "wdth" 104, "wght" 750;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+  }
+
+  ::selection {
+    background-color: #E11D48;
+    color: #FFFFFF;
+  }
+
+  :focus-visible {
+    outline: 2px solid #F43F5E;
+    outline-offset: 2px;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+}
+
+@layer components {
+  .container-wrap {
+    @apply mx-auto w-full max-w-container px-5 sm:px-8 lg:px-12;
+  }
+
+  /* Primary Action Button — Deep Motorsport Crimson */
+  .btn-primary {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    background: #BE123C;
+    color: #FFFFFF;
+    padding: 0.9rem 1.6rem;
+    font-size: 0.84rem;
+    font-weight: 800;
+    font-variation-settings: "wdth" 106;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    border-radius: 4px;
+    border: 1px solid #F43F5E;
+    transition: all 0.2s var(--ease-out-expo);
+  }
+  .btn-primary:hover {
+    background: #E11D48;
+    border-color: #FDA4AF;
+    color: #FFFFFF;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 26px -6px rgba(225, 29, 72, 0.5);
+  }
+
+  /* Secondary Action Button — clearly visible elevated surface */
+  .btn-secondary {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    background: #1C202B;
+    color: #F8FAFC;
+    border: 1px solid #353C4B;
+    padding: 0.9rem 1.6rem;
+    font-size: 0.84rem;
+    font-weight: 700;
+    font-variation-settings: "wdth" 104;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    border-radius: 4px;
+    transition: all 0.2s var(--ease-out-expo);
+  }
+  .btn-secondary:hover {
+    background: #262C3A;
+    border-color: #F43F5E;
+    color: #F43F5E;
+    transform: translateY(-1px);
+  }
+
+  /* Interactive Toggle / Option Button (Unselected vs Selected) */
+  .ui-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 0.95rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    border-radius: 4px;
+    background-color: #1E2330;
+    color: #E2E8F0;
+    border: 1px solid #363E4F;
+    cursor: pointer;
+    transition: all 0.18s ease;
+  }
+  .ui-btn:hover {
+    background-color: #282F40;
+    border-color: #64748B;
+    color: #FFFFFF;
+  }
+  .ui-btn.is-active {
+    background-color: #BE123C;
+    border-color: #F43F5E;
+    color: #FFFFFF;
+    font-weight: 800;
+    box-shadow: 0 4px 16px rgba(225, 29, 72, 0.35);
+  }
+
+  /* Interactive Tier Card (Unselected vs Selected) */
+  .ui-tier-card {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 1.25rem 1.35rem;
+    border-radius: 6px;
+    background-color: #161922;
+    border: 1px solid #2C3342;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .ui-tier-card:hover {
+    background-color: #1C202C;
+    border-color: #4B5568;
+  }
+  .ui-tier-card.is-active {
+    background-color: #1F161B;
+    border: 2px solid #F43F5E;
+    box-shadow: 0 10px 30px -10px rgba(225, 29, 72, 0.28);
+  }
+
+  /* Technical spec badge */
+  .eyebrow-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #FB7185;
+    padding: 0.35rem 0.75rem;
+    background: rgba(225, 29, 72, 0.12);
+    border: 1px solid rgba(244, 63, 94, 0.32);
+    border-left: 3px solid #E11D48;
+    border-radius: 2px;
+  }
+}
+
+.bg-volt {
+  background-color: #BE123C !important;
+  color: #FFFFFF !important;
+}
+
+/* Subtle architectural grid background */
+.bg-grid-pattern {
+  background-size: 48px 48px;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+/* Outlined stroke display text */
+.text-stroke {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.45);
+  transition: -webkit-text-stroke-color 0.3s, color 0.3s;
+}
+.text-stroke-volt {
+  color: transparent;
+  -webkit-text-stroke: 1.5px #F43F5E;
+}
+
+/* 397 Wagon Twin-Stripe Diagonal Livery Accent */
+.livery-stripes {
+  background: repeating-linear-gradient(
+    -62deg,
+    transparent,
+    transparent 18px,
+    rgba(255, 255, 255, 0.04) 18px,
+    rgba(255, 255, 255, 0.04) 36px,
+    transparent 36px,
+    transparent 46px,
+    rgba(225, 29, 72, 0.14) 46px,
+    rgba(225, 29, 72, 0.14) 54px
+  );
+}
+
+/* Infinite Marquee Tape */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Tactile Material Card Effects */
+.material-card {
+  position: relative;
+  background: #13161E;
+  border: 1px solid #262B38;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: border-color 0.3s var(--ease-out-expo), transform 0.3s var(--ease-out-expo), box-shadow 0.3s;
+}
+.material-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(225, 29, 72, 0.1),
+    transparent 45%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 1;
+}
+.material-card:hover {
+  border-color: rgba(244, 63, 94, 0.65);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.7);
+}
+.material-card:hover::before {
+  opacity: 1;
+}
+
+/* Service-specific physical simulations */
+.fx-wrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -120%;
+  width: 65%;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.1) 48%,
+    rgba(225, 29, 72, 0.18) 52%,
+    transparent 80%
+  );
+  transition: left 0.75s var(--ease-out-expo);
+  pointer-events: none;
+}
+.fx-wrap:hover::after {
+  left: 140%;
+}
+
+.fx-frost-band {
+  position: relative;
+  overflow: hidden;
+}
+.fx-frost-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(235, 242, 248, 0.18);
+  backdrop-filter: blur(10px) saturate(0.4);
+  -webkit-backdrop-filter: blur(10px) saturate(0.4);
+  border-right: 2px solid #F43F5E;
+  width: 38%;
+  transition: width 0.55s var(--ease-out-expo);
+  pointer-events: none;
+}
+.material-card:hover .fx-frost-overlay {
+  width: 88%;
+}
+
+.fx-3d-text {
+  text-shadow:
+    1px 1px 0 #262930,
+    2px 2px 0 #262930,
+    3px 3px 0 #262930,
+    4px 4px 0 #181a1f,
+    5px 5px 0 #181a1f,
+    6px 6px 14px rgba(0, 0, 0, 0.85);
+  transition: transform 0.3s var(--ease-out-expo), text-shadow 0.3s var(--ease-out-expo), color 0.3s;
+}
+.material-card:hover .fx-3d-text {
+  color: #F43F5E;
+  transform: translate(-2px, -2px);
+  text-shadow:
+    1px 1px 0 #4c0519,
+    2px 2px 0 #4c0519,
+    3px 3px 0 #3b0413,
+    4px 4px 0 #3b0413,
+    5px 5px 0 #24020b,
+    8px 10px 20px rgba(225, 29, 72, 0.38);
+}
+
+.fx-led-box {
+  transition: box-shadow 0.35s var(--ease-out-expo), border-color 0.35s;
+}
+.material-card:hover .fx-led-box {
+  border-color: #fff;
+  box-shadow:
+    0 0 18px rgba(225, 29, 72, 0.65),
+    0 0 40px rgba(225, 29, 72, 0.28),
+    inset 0 0 14px rgba(225, 29, 72, 0.22);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee { animation: none; }
+}

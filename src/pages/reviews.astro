@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import PhotoCard from '../components/PhotoCard.astro';
+import { SITE, PHOTOS } from '../data/site';
+
+const showcase = [
+  PHOTOS['wagon-wrap'],
+  PHOTOS['frosting-office'],
+  PHOTOS['corridor-signage'],
+  PHOTOS['frosting-meeting-room'],
+];
+---
+
+<BaseLayout
+  title="Client Reviews | 397 Graphix Wellington"
+  description="Customer feedback and project reviews for 397 Graphix in Wellington. Had a wrap, sign, or office fit-out done by us? Leave a review."
+  canonicalPath="reviews"
+  currentPage="/reviews"
+>
+  <PageHeader
+    eyebrow="CLIENT FEEDBACK // WLG"
+    title="WORD ON THE STREET."
+    description="We are building up our public review board. If we have wrapped your vehicle, frosted your office, or built your signage, we’d love to hear how it went."
+  />
+
+  <section class="py-16 sm:py-24 border-b border-white/[0.1]">
+    <div class="container-wrap">
+      <div class="material-card reg-mark p-8 sm:p-12 max-w-3xl">
+        <span class="eyebrow-badge mb-4">HAD WORK DONE BY 397 GRAPHIX?</span>
+        <h2 class="font-display text-2xl sm:text-4xl text-white">
+          DROP US A QUICK REVIEW.
+        </h2>
+        <p class="mt-4 text-base text-gray-300 leading-relaxed">
+          Word of mouth is huge for a local trade business. A short note helps other Wellington businesses find us and tells Ryan how your wrap, sign, or fit-out is performing.
+        </p>
+
+        <div class="mt-8 flex flex-wrap items-center gap-4">
+          <a
+            href={SITE.googleReviewLink}
+            data-needs-link
+            target="_blank"
+            rel="noopener"
+            class="btn-primary"
+          >
+            Leave a Google Review
+          </a>
+          <a
+            href={`mailto:${SITE.email}?subject=${encodeURIComponent('Feedback for 397 Graphix')}`}
+            class="btn-secondary"
+          >
+            <span>EMAIL YOUR FEEDBACK TO RYAN</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 sm:py-24 bg-charcoal">
+    <div class="container-wrap">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+        <div>
+          <span class="eyebrow-badge mb-4">RECENT INSTALLS</span>
+          <h2 class="font-display text-3xl sm:text-5xl text-white">
+            THE WORK SPEAKS FIRST.
+          </h2>
+        </div>
+        <a
+          href="/gallery"
+          class="font-mono text-xs font-bold uppercase text-volt hover:underline"
+        >
+          VIEW FULL ARCHIVE (8) &rarr;
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 gap-7 sm:grid-cols-2">
+        {
+          showcase.map((photo, idx) => (
+            <PhotoCard photo={photo} aspectClass="aspect-[16/11]" index={idx} />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

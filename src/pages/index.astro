@@ -1,0 +1,595 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PhotoCard from '../components/PhotoCard.astro';
+import StudioPromoBanner from '../components/StudioPromoBanner.astro';
+import FaqSection from '../components/FaqSection.astro';
+import { SITE, PHOTOS, PROCESS_STEPS } from '../data/site';
+
+const featuredPhotos = [
+  {
+    id: 'home-wrap-showcase',
+    src: '/assets/img/showcase-fleet.webp',
+    srcSm: '/assets/img/showcase-fleet.webp',
+    width: 1376,
+    height: 768,
+    alt: 'Commercial trade van and dual-cab work ute in a matte charcoal, white, and crimson geometric livery wrap',
+    title: 'Commercial Fleet & Ute Wraps',
+    caption: 'Cohesive partial & full vinyl wrap liveries engineered for single trade utes right up to commercial fleets',
+    category: 'vehicles' as const,
+    categories: ['vehicles'],
+    tag: 'Vehicle Wraps',
+    location: 'Wellington Region',
+  },
+  {
+    id: 'home-frost-showcase',
+    src: '/assets/img/hero-frost-applied.webp',
+    srcSm: '/assets/img/hero-frost-applied.webp',
+    width: 1408,
+    height: 768,
+    alt: 'Corporate boardroom frameless glass partition with etched privacy band and precision cut pinstripes',
+    title: 'Boardroom & Office Glass Frosting',
+    caption: 'Optically clean polymeric etched glass bands, precision pinstripes, and meeting room wayfinding',
+    category: 'fitouts' as const,
+    categories: ['fitouts'],
+    tag: 'Office Fit-out',
+    location: 'Wellington CBD',
+  },
+  {
+    id: 'home-led-showcase',
+    src: '/assets/img/hero-led-on.webp',
+    srcSm: '/assets/img/hero-led-on.webp',
+    width: 1408,
+    height: 768,
+    alt: 'Architectural 3D dimensional reception wall signage with warm perimeter LED halo illumination',
+    title: '3D Dimensional & Halo LED Signage',
+    caption: 'CNC-routed acrylic & brushed metal dimensional wall graphics with concealed perimeter LED halo lighting',
+    category: 'signage' as const,
+    categories: ['fitouts', 'signage'],
+    tag: '3D & LED Signage',
+    location: 'Wellington Region',
+  },
+  {
+    id: 'home-exterior-showcase',
+    src: '/assets/img/showcase-exterior.webp',
+    srcSm: '/assets/img/showcase-exterior.webp',
+    width: 1408,
+    height: 768,
+    alt: 'Modern commercial building exterior with illuminated architectural fascia signage at dusk',
+    title: 'External Building & Fascia Signage',
+    caption: 'Weather-rated ACM building fascias, illuminated pylon signs, and commercial showroom branding',
+    category: 'signage' as const,
+    categories: ['signage'],
+    tag: 'External Signage',
+    location: 'Wellington Region',
+  },
+];
+---
+
+<BaseLayout
+  title="397 Graphix | Custom Vehicle Wraps, Signage & Architectural Fit-outs | Wellington"
+  description="Wellington-based 397 Graphix: custom vehicle wraps, commercial fleet signage, architectural window frosting, 3D lettering, and LED light fixtures. Call 022 500 3904."
+  canonicalPath=""
+  currentPage="/"
+>
+  <!-- HERO: KINETIC LIVERY & INTERACTIVE STUDIO LAB -->
+  <section class="relative overflow-hidden border-b border-white/[0.1] bg-obsidian pt-8 pb-16 sm:py-20 lg:py-24">
+    <div class="bg-grid-pattern pointer-events-none absolute inset-0 opacity-60"></div>
+    <div class="livery-stripes pointer-events-none absolute top-0 right-0 h-full w-1/2 opacity-40"></div>
+    <div
+      class="pointer-events-none absolute -top-24 right-1/4 h-[380px] w-[380px] rounded-full bg-volt/[0.06] blur-[120px]"
+    ></div>
+
+    <div class="container-wrap relative z-10">
+      <div class="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-10">
+        <!-- Left: Display Typography & Direct Actions -->
+        <div class="lg:col-span-6 space-y-6">
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="eyebrow-badge">WELLINGTON · CUSTOM FABRICATION</span>
+          </div>
+
+          <h1 class="font-display text-4xl sm:text-5xl xl:text-6xl text-white select-none">
+            <span class="block">MAKE YOUR</span>
+            <span class="block">BUSINESS</span>
+            <span class="block text-volt drop-shadow-[0_0_24px_rgba(225,29,72,0.35)]">
+              IMPOSSIBLE
+            </span>
+            <span class="block text-stroke hover:text-white">TO MISS.</span>
+          </h1>
+
+          <p class="text-base sm:text-lg text-gray-300 leading-relaxed max-w-xl border-l-2 border-volt/60 pl-4">
+            We turn work utes into rolling billboards, raw office glass into architectural spaces, and blank walls into 3D backlit statements. <strong class="text-white">One crew designs, fabricates, and installs the lot across Wellington.</strong>
+          </p>
+
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-1">
+            <a href="/contact#quote" class="btn-primary text-sm sm:text-base">
+              <span>Start Your Project</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+            <a href={SITE.tel} class="btn-secondary text-sm sm:text-base">
+              <span>Call Ryan: {SITE.phone}</span>
+            </a>
+          </div>
+
+          <!-- Technical Spec Strip -->
+          <div class="pt-6 border-t border-white/[0.1] grid grid-cols-3 gap-4 max-w-lg text-xs">
+            <div>
+              <span class="block font-mono text-volt font-bold mb-0.5">01 // DIRECT</span>
+              <span class="text-gray-300">Deal with the installer</span>
+            </div>
+            <div>
+              <span class="block font-mono text-volt font-bold mb-0.5">02 // IN-HOUSE</span>
+              <span class="text-gray-300">Design, print &amp; cut</span>
+            </div>
+            <div>
+              <span class="block font-mono text-volt font-bold mb-0.5">03 // RATED</span>
+              <span class="text-gray-300">Built for WLG weather</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Interactive Live Material & Squeegee Lab -->
+        <div class="lg:col-span-6">
+          <div class="rounded-md border border-[#2C3342] bg-[#13161F] shadow-2xl overflow-hidden">
+            <!-- Interactive Mode Switcher Header -->
+            <div class="flex flex-wrap items-center justify-between border-b border-white/[0.1] bg-[#0D0F14] px-4 py-3 gap-2.5">
+              <div class="flex items-center gap-2">
+                <span class="h-2 w-2 rounded-full bg-volt"></span>
+                <span class="text-xs font-mono font-bold uppercase tracking-wider text-white">
+                  Interactive Studio // Drag Slider
+                </span>
+              </div>
+              <div class="flex flex-wrap items-center gap-1.5" role="tablist" aria-label="Interactive material preview">
+                <button
+                  type="button"
+                  data-lab-mode="frost"
+                  class="lab-tab ui-btn is-active !px-2.5 !py-1.5 !text-[11px]"
+                >
+                  01. Window Frosting
+                </button>
+                <button
+                  type="button"
+                  data-lab-mode="wrap"
+                  class="lab-tab ui-btn !px-2.5 !py-1.5 !text-[11px]"
+                >
+                  02. Fleet Livery
+                </button>
+                <button
+                  type="button"
+                  data-lab-mode="led"
+                  class="lab-tab ui-btn !px-2.5 !py-1.5 !text-[11px]"
+                >
+                  03. 3D LED Halo
+                </button>
+              </div>
+            </div>
+
+            <!-- Interactive Viewport Canvas -->
+            <div
+              id="lab-stage"
+              class="relative aspect-[16/10] w-full overflow-hidden select-none bg-obsidian"
+              style="--split: 58%;"
+            >
+              <!-- PANEL 1: INTERACTIVE FROST SQUEEGEE (STRAIGHT-ON BOARDROOM GLASS) -->
+              <div data-lab-panel="frost" class="absolute inset-0">
+                <!-- Right / Underlying Layer: Clear Unfrosted Boardroom Glass -->
+                <img
+                  src="/assets/img/hero-frost-clear.webp"
+                  alt="Clear corporate boardroom glass partition before privacy frosting"
+                  width="1408"
+                  height="768"
+                  fetchpriority="high"
+                  class="h-full w-full object-cover"
+                />
+                <!-- Left / Clipped Layer: Precision Etched Privacy Band & Pinstripes on Glass -->
+                <div
+                  class="absolute inset-0 overflow-hidden pointer-events-none"
+                  style="clip-path: inset(0 calc(100% - var(--split, 58%)) 0 0);"
+                >
+                  <img
+                    src="/assets/img/hero-frost-applied.webp"
+                    alt="Boardroom glass partition with architectural etched privacy film and pinstripes applied"
+                    width="1408"
+                    height="768"
+                    class="h-full w-full object-cover"
+                  />
+                </div>
+
+                <div class="pointer-events-none absolute top-3 left-3 rounded bg-obsidian/90 border border-volt/60 px-2.5 py-1 text-[10px] font-mono font-bold uppercase text-volt">
+                  &larr; Privacy Film Applied
+                </div>
+                <div class="pointer-events-none absolute top-3 right-3 rounded bg-obsidian/90 border border-white/25 px-2.5 py-1 text-[10px] font-mono uppercase text-gray-200">
+                  Clear Glass &rarr;
+                </div>
+              </div>
+
+              <!-- PANEL 2: TWO-TONE COMMERCIAL FLEET LIVERY -->
+              <div data-lab-panel="wrap" hidden class="absolute inset-0">
+                <!-- Right / Underlying Layer: Unwrapped Factory Paint -->
+                <img
+                  src="/assets/img/hero-wrap-before.webp"
+                  alt="Commercial van and dual-cab ute in factory paint before vinyl wrap"
+                  width="1408"
+                  height="768"
+                  class="h-full w-full object-cover"
+                />
+                <!-- Left / Clipped Layer: Full Two-Tone Crimson & White Commercial Livery -->
+                <div
+                  class="absolute inset-0 overflow-hidden pointer-events-none"
+                  style="clip-path: inset(0 calc(100% - var(--split, 58%)) 0 0);"
+                >
+                  <img
+                    src="/assets/img/hero-wrap-after.webp"
+                    alt="Commercial van and dual-cab ute with custom crimson and white vinyl wrap livery"
+                    width="1408"
+                    height="768"
+                    class="h-full w-full object-cover"
+                  />
+                </div>
+                <div class="pointer-events-none absolute top-3 left-3 rounded bg-obsidian/90 border border-volt/60 px-2.5 py-1 text-[10px] font-mono font-bold uppercase text-volt">
+                  &larr; Custom Livery Wrap
+                </div>
+                <div class="pointer-events-none absolute top-3 right-3 rounded bg-obsidian/90 border border-white/25 px-2.5 py-1 text-[10px] font-mono uppercase text-gray-200">
+                  Base Vehicle &rarr;
+                </div>
+              </div>
+
+              <!-- PANEL 3: 3D DIMENSIONAL & LED HALO BACKLIGHT LAB -->
+              <div data-lab-panel="led" hidden class="absolute inset-0">
+                <!-- Right / Underlying Layer: Unlit Daylight 3D Sign -->
+                <img
+                  src="/assets/img/hero-led-off.webp"
+                  alt="3D dimensional reception signage on dark slate wall with LED halo switched off"
+                  width="1408"
+                  height="768"
+                  class="h-full w-full object-cover object-center"
+                />
+                <!-- Left / Clipped Layer: Warm Perimeter LED Halo Illuminated -->
+                <div
+                  class="absolute inset-0 overflow-hidden pointer-events-none"
+                  style="clip-path: inset(0 calc(100% - var(--split, 58%)) 0 0);"
+                >
+                  <img
+                    src="/assets/img/hero-led-on.webp"
+                    alt="3D dimensional reception signage illuminated with warm perimeter LED halo backlighting"
+                    width="1408"
+                    height="768"
+                    class="h-full w-full object-cover object-center"
+                  />
+                </div>
+                <div class="pointer-events-none absolute top-3 left-3 rounded bg-obsidian/90 border border-volt/60 px-2.5 py-1 text-[10px] font-mono font-bold uppercase text-volt">
+                  &larr; Perimeter LED Halo On
+                </div>
+                <div class="pointer-events-none absolute top-3 right-3 rounded bg-obsidian/90 border border-white/25 px-2.5 py-1 text-[10px] font-mono uppercase text-gray-200">
+                  Unlit Daylight &rarr;
+                </div>
+              </div>
+
+              <!-- Squeegee / Plotter Divider Line -->
+              <div
+                id="lab-divider"
+                class="pointer-events-none absolute inset-y-0 w-0.5 bg-volt shadow-[0_0_16px_#E11D48]"
+                style="left: var(--split, 58%);"
+              >
+                <div
+                  class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-volt text-white font-mono text-xs font-black shadow-[0_0_24px_rgba(225,29,72,0.85)]"
+                >
+                  &harr;
+                </div>
+              </div>
+
+              <!-- Accessible Range Input Overlay -->
+              <input
+                id="lab-range"
+                type="range"
+                min="5"
+                max="95"
+                value="58"
+                aria-label="Drag squeegee slider to compare before and after"
+                class="absolute inset-0 h-full w-full opacity-0 cursor-ew-resize z-20 m-0"
+              />
+            </div>
+
+            <!-- Bottom Status Bar -->
+            <div class="border-t border-white/[0.1] bg-[#0D0F14] px-4 py-2.5 text-xs font-mono space-y-1">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span id="lab-caption" class="text-gray-300">
+                  // Drag the slider to test architectural privacy film
+                </span>
+                <a href="/studio" class="text-volt font-bold hover:underline uppercase whitespace-nowrap">
+                  Open 3D Wrap Studio &rarr;
+                </a>
+              </div>
+              <p class="text-[10px] text-gray-500">
+                * Interactive preview uses AI-generated studio concept renders as an illustrative example only.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KINETIC PLOTTER TAPE MARQUEE (CONSTRAINED TO CONTAINER WIDTH WITH EDGE FADE) -->
+  <div class="border-b border-white/[0.1] bg-obsidian py-4 select-none">
+    <div class="container-wrap">
+      <div
+        class="relative overflow-hidden rounded-sm border border-volt/35 bg-volt text-white py-2.5"
+        style="-webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);"
+      >
+        <div class="animate-marquee flex items-center gap-10 font-display text-sm tracking-wider whitespace-nowrap">
+          <span>VEHICLE WRAPS</span>
+          <span class="opacity-60">//</span>
+          <span>COMMERCIAL FLEET SIGNAGE</span>
+          <span class="opacity-60">//</span>
+          <span>ARCHITECTURAL WINDOW FROSTING</span>
+          <span class="opacity-60">//</span>
+          <span>CNC 3D LETTERING</span>
+          <span class="opacity-60">//</span>
+          <span>HALO LED LIGHT FIXTURES</span>
+          <span class="opacity-60">//</span>
+          <span>WELLINGTON REGION NZ</span>
+          <span class="opacity-60">//</span>
+          <span>VEHICLE WRAPS</span>
+          <span class="opacity-60">//</span>
+          <span>COMMERCIAL FLEET SIGNAGE</span>
+          <span class="opacity-60">//</span>
+          <span>ARCHITECTURAL WINDOW FROSTING</span>
+          <span class="opacity-60">//</span>
+          <span>CNC 3D LETTERING</span>
+          <span class="opacity-60">//</span>
+          <span>HALO LED LIGHT FIXTURES</span>
+          <span class="opacity-60">//</span>
+          <span>WELLINGTON REGION NZ</span>
+          <span class="opacity-60">//</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE MATERIAL SWATCHES: 6 CORE CAPABILITIES -->
+  <section class="py-20 sm:py-28 border-b border-white/[0.1] relative">
+    <div class="container-wrap">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14">
+        <div>
+          <span class="eyebrow-badge mb-3">01–06 // FABRICATION CAPABILITIES</span>
+          <h2 class="font-display text-3xl sm:text-5xl text-white">
+            ONE CREW. <span class="text-volt">EVERY SURFACE.</span>
+          </h2>
+        </div>
+        <p class="text-sm sm:text-base text-gray-400 max-w-md lg:text-right">
+          Hover or tap any material card below to preview the finish. Your ute, your building facade, and your boardroom glass are all crafted under one roof.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <!-- 01: Vehicle Wraps -->
+        <a href="/services#vehicle-wraps" class="material-card fx-wrap group flex flex-col justify-between p-6 sm:p-7">
+          <div>
+            <div class="flex items-center justify-between font-mono text-xs text-gray-400 mb-5">
+              <span class="text-volt font-bold">// 01</span>
+              <span>CAST AUTOMOTIVE FILM</span>
+            </div>
+            <div class="relative h-28 mb-5 rounded border border-white/[0.12] bg-gradient-to-br from-zinc-900 via-black to-zinc-800 overflow-hidden flex items-center justify-between px-5">
+              <div class="w-1/2 h-full bg-white/95 -skew-x-[24deg] -ml-8 flex items-center pl-10">
+                <span class="font-mono font-extrabold text-xs text-obsidian skew-x-[24deg]">GLOSS WHITE</span>
+              </div>
+              <span class="font-mono font-bold text-xs text-volt tracking-wider">MATTE CARBON</span>
+            </div>
+            <h3 class="font-heading text-xl sm:text-2xl font-bold text-white group-hover:text-volt transition-colors">
+              Vehicle Wraps
+            </h3>
+            <p class="mt-2.5 text-sm text-gray-300 leading-relaxed">
+              Full and partial wraps, custom two-tone liveries, and colour changes with tucked edges that protect the factory paint underneath.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-white/[0.08] flex items-center justify-between font-mono text-xs font-bold text-white group-hover:text-volt">
+            <span>VIEW SERVICE SPECS</span>
+            <span>&rarr;</span>
+          </div>
+        </a>
+
+        <!-- 02: Commercial Vehicle Signage -->
+        <a href="/services#vehicle-signage" class="material-card group flex flex-col justify-between p-6 sm:p-7">
+          <div>
+            <div class="flex items-center justify-between font-mono text-xs text-gray-400 mb-5">
+              <span class="text-volt font-bold">// 02</span>
+              <span>HIGH-TACK FLEET VINYL</span>
+            </div>
+            <div class="relative h-28 mb-5 rounded border border-white/[0.12] bg-obsidian overflow-hidden flex items-center justify-center p-4">
+              <div class="livery-stripes absolute inset-0 opacity-75"></div>
+              <div class="relative z-10 rounded border border-volt/60 bg-[#141720] px-4 py-2 text-center transition-transform duration-300 group-hover:scale-105">
+                <span class="font-heading text-base font-extrabold text-white tracking-wider block">FLEET // READY</span>
+                <span class="font-mono text-[11px] text-volt font-bold">1 UTE TO 20 VANS</span>
+              </div>
+            </div>
+            <h3 class="font-heading text-xl sm:text-2xl font-bold text-white group-hover:text-volt transition-colors">
+              Commercial Fleet Signage
+            </h3>
+            <p class="mt-2.5 text-sm text-gray-300 leading-relaxed">
+              High-contrast door logos, contact numbers, and one-way rear window graphics legible from across the street.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-white/[0.08] flex items-center justify-between font-mono text-xs font-bold text-white group-hover:text-volt">
+            <span>VIEW SERVICE SPECS</span>
+            <span>&rarr;</span>
+          </div>
+        </a>
+
+        <!-- 03: Office Fit-outs & Window Frosting -->
+        <a href="/services#office-fitouts" class="material-card group flex flex-col justify-between p-6 sm:p-7">
+          <div>
+            <div class="flex items-center justify-between font-mono text-xs text-gray-400 mb-5">
+              <span class="text-volt font-bold">// 03</span>
+              <span>POLYMERIC ETCH FILM</span>
+            </div>
+            <div class="fx-frost-band h-28 mb-5 rounded border border-white/[0.12] bg-obsidian flex items-center justify-center">
+              <span class="font-heading text-xl font-extrabold text-white/85 tracking-widest">SUITE 11.05</span>
+              <div class="fx-frost-overlay flex items-center pl-4">
+                <span class="font-mono text-[11px] text-volt uppercase font-bold">FROST PASS &rarr;</span>
+              </div>
+            </div>
+            <h3 class="font-heading text-xl sm:text-2xl font-bold text-white group-hover:text-volt transition-colors">
+              Office Fit-outs &amp; Frosting
+            </h3>
+            <p class="mt-2.5 text-sm text-gray-300 leading-relaxed">
+              Optically clean boardroom glass frosting, pinstripe safety bands, room numbering, and standoff acrylic wayfinding.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-white/[0.08] flex items-center justify-between font-mono text-xs font-bold text-white group-hover:text-volt">
+            <span>VIEW SERVICE SPECS</span>
+            <span>&rarr;</span>
+          </div>
+        </a>
+
+        <!-- 04: External Signage -->
+        <a href="/services#external-signage" class="material-card group flex flex-col justify-between p-6 sm:p-7">
+          <div>
+            <div class="flex items-center justify-between font-mono text-xs text-gray-400 mb-5">
+              <span class="text-volt font-bold">// 04</span>
+              <span>ACM &amp; MARINE FIXINGS</span>
+            </div>
+            <div class="relative h-28 mb-5 rounded border border-white/[0.15] bg-[#0B0D12] flex items-center justify-center px-4">
+              <span class="font-heading text-lg font-extrabold text-white tracking-wider border-b-2 border-volt pb-1">
+                EXTERIOR GRADE // WLG
+              </span>
+            </div>
+            <h3 class="font-heading text-xl sm:text-2xl font-bold text-white group-hover:text-volt transition-colors">
+              External Signage
+            </h3>
+            <p class="mt-2.5 text-sm text-gray-300 leading-relaxed">
+              Shopfront fascias, building signs, and commercial site boards engineered to handle Wellington wind, rain, and coastal UV.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-white/[0.08] flex items-center justify-between font-mono text-xs font-bold text-white group-hover:text-volt">
+            <span>VIEW SERVICE SPECS</span>
+            <span>&rarr;</span>
+          </div>
+        </a>
+
+        <!-- 05: 3D Lettering -->
+        <a href="/services#3d-lettering" class="material-card group flex flex-col justify-between p-6 sm:p-7">
+          <div>
+            <div class="flex items-center justify-between font-mono text-xs text-gray-400 mb-5">
+              <span class="text-volt font-bold">// 05</span>
+              <span>CNC / LASER CUT ACRYLIC</span>
+            </div>
+            <div class="relative h-28 mb-5 rounded border border-white/[0.12] bg-obsidian flex items-center justify-center overflow-hidden">
+              <span class="fx-3d-text font-display text-4xl sm:text-5xl text-white select-none">
+                397
+              </span>
+            </div>
+            <h3 class="font-heading text-xl sm:text-2xl font-bold text-white group-hover:text-volt transition-colors">
+              3D Lettering &amp; Logos
+            </h3>
+            <p class="mt-2.5 text-sm text-gray-300 leading-relaxed">
+              Raised dimensional letters and pin-mounted reception logos that throw real architectural shadow depth.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-white/[0.08] flex items-center justify-between font-mono text-xs font-bold text-white group-hover:text-volt">
+            <span>VIEW SERVICE SPECS</span>
+            <span>&rarr;</span>
+          </div>
+        </a>
+
+        <!-- 06: LED Light Fixtures -->
+        <a href="/services#led-fixtures" class="material-card group flex flex-col justify-between p-6 sm:p-7">
+          <div>
+            <div class="flex items-center justify-between font-mono text-xs text-gray-400 mb-5">
+              <span class="text-volt font-bold">// 06</span>
+              <span>12V/24V HALO LED</span>
+            </div>
+            <div class="relative h-28 mb-5 rounded border border-white/[0.12] bg-obsidian flex items-center justify-center p-4">
+              <div class="fx-led-box rounded border border-volt/60 bg-[#141720] px-5 py-2.5 text-center">
+                <span class="font-heading text-base font-extrabold text-white group-hover:text-volt transition-colors">
+                  HALO // BACKLIT
+                </span>
+              </div>
+            </div>
+            <h3 class="font-heading text-xl sm:text-2xl font-bold text-white group-hover:text-volt transition-colors">
+              LED Light Fixtures
+            </h3>
+            <p class="mt-2.5 text-sm text-gray-300 leading-relaxed">
+              Halo-lit reception signs, backlit frames, and custom LED-integrated acoustic feature walls that keep working after dark.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-white/[0.08] flex items-center justify-between font-mono text-xs font-bold text-white group-hover:text-volt">
+            <span>VIEW SERVICE SPECS</span>
+            <span>&rarr;</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE WRAP & SIGNAGE STUDIO PROMO BANNER -->
+  <StudioPromoBanner />
+
+  <!-- SELECTED WORKS: ARCHITECTURAL PORTFOLIO SHOWCASE -->
+  <section class="py-20 sm:py-28 bg-obsidian border-b border-white/[0.1]">
+    <div class="container-wrap">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div>
+          <span class="eyebrow-badge mb-3">CAPABILITY SHOWCASE // CONCEPT EXAMPLES</span>
+          <h2 class="font-display text-3xl sm:text-5xl text-white">
+            BUILT FOR THE <span class="text-volt">STREET.</span>
+          </h2>
+          <p class="mt-2 text-xs font-mono text-gray-400">
+            * Showcase images below are AI-generated concept visualisations for example purposes only. View our actual Wellington installations in the full gallery.
+          </p>
+        </div>
+        <a href="/gallery" class="btn-secondary self-start md:self-auto">
+          <span>View Real Installations (8)</span>
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 gap-7 md:grid-cols-2">
+        {
+          featuredPhotos.map((photo, idx) => (
+            <PhotoCard photo={photo} aspectClass="aspect-[16/11]" index={idx} />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 4-STAGE PROCESS BLUEPRINT -->
+  <section class="py-20 sm:py-28 border-b border-white/[0.1] bg-[#0B0D12] relative overflow-hidden">
+    <div class="bg-grid-pattern pointer-events-none absolute inset-0 opacity-50"></div>
+    <div class="container-wrap relative z-10">
+      <div class="max-w-3xl mb-14">
+        <span class="eyebrow-badge mb-3">WORKFLOW // ZERO MIDDLEMEN</span>
+        <h2 class="font-display text-3xl sm:text-5xl text-white">
+          FROM SKETCH TO <span class="text-volt">SQUEEGEE.</span>
+        </h2>
+        <p class="mt-3 text-base text-gray-400">
+          You deal directly with Ryan from the first phone call to the final post-heat and edge check.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          PROCESS_STEPS.map((item) => (
+            <div class="material-card p-6 sm:p-7 flex flex-col justify-between">
+              <div>
+                <span class="inline-flex h-10 w-10 items-center justify-center rounded bg-volt font-mono text-sm font-black text-obsidian mb-5">
+                  {item.step}
+                </span>
+                <h3 class="font-heading text-lg sm:text-xl font-bold text-white">{item.title}</h3>
+                <p class="mt-2.5 text-sm text-gray-300 leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+              <div class="mt-6 pt-3 border-t border-white/[0.08] font-mono text-[11px] uppercase tracking-wider text-gray-400">
+                Stage {item.step} · Verified
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- TECHNICAL BUYER Q&A + FAQPAGE SCHEMA -->
+  <FaqSection />
+</BaseLayout>

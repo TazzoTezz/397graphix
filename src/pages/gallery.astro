@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import PhotoCard from '../components/PhotoCard.astro';
+import { PHOTOS, GALLERY_ORDER } from '../data/site';
+
+const galleryItems = GALLERY_ORDER.map((id) => PHOTOS[id]);
+---
+
+<BaseLayout
+  title="Project Archive & Work Gallery | 397 Graphix Wellington"
+  description="Browse recent vehicle wraps, commercial ute decals, office glass frosting, wayfinding signage, and LED feature walls completed by 397 Graphix in Wellington."
+  canonicalPath="gallery"
+  currentPage="/gallery"
+>
+  <PageHeader
+    eyebrow="ARCHIVE // COMPLETED INSTALLATIONS"
+    title="PROOF ON THE STREET & IN THE OFFICE."
+    description="Filter by fabrication category below or click any shot to inspect the cut lines, frosting clarity, and finish full-screen."
+  />
+
+  <section class="py-16 sm:py-24">
+    <div class="container-wrap">
+      <!-- Industrial Filter Bar -->
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-10 border-b border-white/[0.1] pb-6">
+        <div
+          class="flex flex-wrap gap-2"
+          role="group"
+          aria-label="Filter projects by category"
+        >
+          <button
+            type="button"
+            class="filter ui-btn is-active"
+            data-filter="all"
+            aria-pressed="true"
+          >
+            All Work ({galleryItems.length})
+          </button>
+          <button
+            type="button"
+            class="filter ui-btn"
+            data-filter="vehicles"
+            aria-pressed="false"
+          >
+            Vehicles &amp; Fleet
+          </button>
+          <button
+            type="button"
+            class="filter ui-btn"
+            data-filter="fitouts"
+            aria-pressed="false"
+          >
+            Office Fit-outs &amp; Frosting
+          </button>
+          <button
+            type="button"
+            class="filter ui-btn"
+            data-filter="signage"
+            aria-pressed="false"
+          >
+            Signage &amp; LED
+          </button>
+        </div>
+
+        <p class="text-xs font-mono uppercase text-gray-400">
+          Click any photo to open full-screen viewer
+        </p>
+      </div>
+
+      <!-- Portfolio Grid -->
+      <div id="gallery-grid" class="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          galleryItems.map((photo, idx) => (
+            <div
+              class="gallery-item"
+              data-cat={photo.categories.join(' ')}
+            >
+              <PhotoCard
+                photo={photo}
+                aspectClass="aspect-[4/3]"
+                eager={idx < 3}
+                index={idx}
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,70 @@
+---
+import { FAQS } from '../data/site';
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQS.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
+---
+
+<section class="py-20 sm:py-28 border-b border-white/[0.1] bg-obsidian relative">
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <div class="container-wrap">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+      <!-- Left Intro Column -->
+      <div class="lg:col-span-4 lg:sticky lg:top-28 space-y-4">
+        <span class="eyebrow-badge">COMMON QUESTIONS</span>
+        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl text-white">
+          STRAIGHT <span class="text-volt">ANSWERS.</span>
+        </h2>
+        <p class="text-sm sm:text-base text-gray-400 leading-relaxed">
+          Everything you need to know about vehicle downtime, paint protection on leased utes, after-hours office frosting, and material durability in Wellington weather.
+        </p>
+        <div class="pt-3">
+          <a href="/contact#quote" class="btn-secondary">
+            <span>Ask Ryan a Question</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Accordion Cards Column -->
+      <div class="lg:col-span-8 space-y-3.5">
+        {
+          FAQS.map((faq, idx) => (
+            <details
+              class="group rounded-md border border-[#282E3D] bg-[#13161F] transition-colors open:border-volt/50 open:bg-[#161A24]"
+              open={idx === 0}
+            >
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 sm:px-6 sm:py-5">
+                <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-left">
+                  <span class="inline-flex self-start sm:self-center shrink-0 items-center rounded bg-[#222836] border border-[#363F54] px-2.5 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-volt">
+                    {faq.tag}
+                  </span>
+                  <h3 class="font-heading text-base sm:text-lg font-bold text-white group-hover:text-volt transition-colors">
+                    {faq.question}
+                  </h3>
+                </div>
+                <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded border border-[#363F54] bg-[#1E2330] font-mono text-lg font-bold text-volt transition-transform duration-200 group-open:rotate-45">
+                  +
+                </span>
+              </summary>
+              <div class="border-t border-white/[0.08] px-5 py-4 sm:px-6 sm:py-5 text-sm sm:text-base text-gray-300 leading-relaxed">
+                {faq.answer}
+              </div>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

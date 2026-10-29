@@ -1,0 +1,169 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import StudioPromoBanner from '../components/StudioPromoBanner.astro';
+import FaqSection from '../components/FaqSection.astro';
+import { SERVICES, PHOTOS } from '../data/site';
+---
+
+<BaseLayout
+  title="Capabilities & Services | 397 Graphix Wellington"
+  description="Vehicle wraps, commercial vehicle signage, office fit-outs, window frosting, external signage, 3D lettering, and LED light fixtures in Wellington."
+  canonicalPath="services"
+  currentPage="/services"
+>
+  <PageHeader
+    eyebrow="01–06 // FABRICATION & INSTALLATION"
+    title="BUILT IN-HOUSE. FITTED PROPERLY."
+    description="Everything your business needs to command attention—on the road, on the building facade, and inside the office."
+  >
+    <nav
+      aria-label="Jump to service section"
+      class="mt-8 flex flex-wrap gap-2"
+    >
+      {
+        SERVICES.map((s) => (
+          <a
+            href={`#${s.id}`}
+            class="ui-btn"
+          >
+            <span class="text-volt font-bold mr-1.5">{s.number}</span>
+            {s.name}
+          </a>
+        ))
+      }
+    </nav>
+  </PageHeader>
+
+  <section class="py-16 sm:py-24">
+    <div class="container-wrap space-y-12 sm:space-y-16">
+      {
+        SERVICES.map((service, idx) => {
+          const photo = service.photoId ? PHOTOS[service.photoId] : null;
+          const isEven = idx % 2 === 1;
+
+          return (
+            <article
+              id={service.id}
+              class="material-card p-6 sm:p-10 scroll-mt-28"
+            >
+              <div class="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center">
+                <!-- Media / Physical Spec Column -->
+                <div
+                  class:list={[
+                    'lg:col-span-5',
+                    isEven ? 'lg:order-2' : '',
+                  ]}
+                >
+                  {photo ? (
+                    <a
+                      href={photo.src}
+                      data-caption={photo.caption}
+                      data-tag={photo.tag}
+                      class="shot group relative block rounded border border-white/[0.15] bg-obsidian overflow-hidden"
+                    >
+                      <div class="aspect-[4/3] overflow-hidden">
+                        <img
+                          src={photo.srcSm}
+                          srcset={`${photo.srcSm} 800w, ${photo.src} ${photo.width}w`}
+                          sizes="(max-width: 1024px) 100vw, 42vw"
+                          width={photo.width}
+                          height={photo.height}
+                          alt={photo.alt}
+                          loading="lazy"
+                          decoding="async"
+                          class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                      </div>
+                      <div class="border-t border-white/[0.1] bg-[#0B0D12] px-4 py-2.5 flex items-center justify-between text-xs font-mono text-gray-300">
+                        <span class="truncate">{photo.caption}</span>
+                        <span class="text-volt font-bold shrink-0 ml-2">Enlarge +</span>
+                      </div>
+                    </a>
+                  ) : (
+                    <div class="relative aspect-[4/3] overflow-hidden rounded border border-[#2C3342] bg-[#0B0D12] p-7 flex flex-col justify-between bg-grid-pattern">
+                      <div class="flex items-center justify-between font-mono text-xs">
+                        <span class="text-volt font-bold">// CUSTOM FABRICATION</span>
+                        <span class="text-gray-400">SPEC {service.number}</span>
+                      </div>
+
+                      <div class="my-auto py-4">
+                        <p class="fx-3d-text font-display text-3xl sm:text-4xl text-white">
+                          {service.name}
+                        </p>
+                        <p class="mt-2 font-mono text-xs text-volt uppercase">
+                          {service.specs}
+                        </p>
+                      </div>
+
+                      <div class="border-t border-white/[0.1] pt-3 flex items-center justify-between text-xs font-mono text-gray-400">
+                        <span>Wellington Region</span>
+                        <a href="#sign-simulator" class="text-volt hover:underline font-bold">
+                          Try Live Simulator &darr;
+                        </a>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <!-- Copy Column -->
+                <div
+                  class:list={[
+                    'lg:col-span-7 space-y-4',
+                    isEven ? 'lg:order-1' : '',
+                  ]}
+                >
+                  <div class="flex flex-wrap items-center gap-3 font-mono text-xs">
+                    <span class="rounded bg-volt px-2.5 py-0.5 font-extrabold text-obsidian">
+                      {service.number}
+                    </span>
+                    <span class="uppercase tracking-wider text-gray-300">
+                      {service.specs}
+                    </span>
+                  </div>
+
+                  <h2 class="font-heading text-2xl sm:text-3xl font-extrabold text-white">
+                    {service.name}
+                  </h2>
+
+                  <p class="text-base sm:text-lg font-medium text-gray-200 leading-snug">
+                    {service.shortDesc}
+                  </p>
+
+                  <p class="text-sm sm:text-base text-gray-300 leading-relaxed">
+                    {service.longDesc}
+                  </p>
+
+                  <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2">
+                    {service.bullets.map((b) => (
+                      <li class="flex items-start gap-2.5 text-sm text-gray-200 font-medium">
+                        <span class="text-volt font-mono font-bold">+</span>
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div class="pt-4">
+                    <a
+                      href={`/contact?service=${service.id}#quote`}
+                      class="btn-primary"
+                    >
+                      <span>Quote {service.name}</span>
+                      <span aria-hidden="true">&rarr;</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
+  </section>
+
+  <!-- INTERACTIVE WRAP & SIGNAGE STUDIO PROMO BANNER -->
+  <StudioPromoBanner />
+
+  <!-- TECHNICAL Q&A -->
+  <FaqSection />
+</BaseLayout>

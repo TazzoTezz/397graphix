@@ -1,0 +1,1019 @@
+---
+---
+
+<section id="configurator" class="py-20 sm:py-28 border-b border-white/[0.1] bg-[#0D0F14] relative overflow-hidden">
+  <div class="bg-grid-pattern pointer-events-none absolute inset-0 opacity-50"></div>
+
+  <div class="container-wrap relative z-10">
+    <!-- Section Header -->
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
+      <div>
+        <span class="eyebrow-badge mb-3">INTERACTIVE 3D WRAP &amp; LIVERY DESIGNER</span>
+        <h2 class="font-display text-3xl sm:text-5xl text-white">
+          DESIGN YOUR <span class="text-volt">VEHICLE WRAP.</span>
+        </h2>
+        <p class="mt-2.5 text-sm sm:text-base text-gray-300 max-w-2xl">
+          Pick your vehicle, customize the wrap pattern and colours, upload your own logo, and drag your signwriting directly onto the bodywork—then download a PNG proof or send it straight to Ryan for a quote.
+        </p>
+      </div>
+
+      <!-- Mode Switcher: Vehicle Designer vs Office Glass -->
+      <div class="inline-flex flex-wrap gap-2 rounded-md border border-[#2C3342] bg-[#141720] p-1.5 self-start lg:self-auto" role="tablist">
+        <button
+          type="button"
+          data-cfg-mode="vehicle"
+          class="cfg-mode-btn ui-btn is-active"
+        >
+          01. Vehicle Wrap Studio
+        </button>
+        <button
+          type="button"
+          data-cfg-mode="glass"
+          class="cfg-mode-btn ui-btn"
+        >
+          02. Office Glass Studio
+        </button>
+      </div>
+    </div>
+
+    <!-- =====================================================
+         MODE 1: INTERACTIVE VEHICLE WRAP DESIGNER
+    ====================================================== -->
+    <div id="cfg-panel-vehicle" class="rounded-lg border border-[#2C3342] bg-[#13161F] p-4 sm:p-7 shadow-2xl">
+      <!-- Top Studio Bar: Vehicle Selector + Quick Actions -->
+      <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/[0.1] pb-4">
+        <div class="flex flex-wrap items-center gap-2" role="group" aria-label="Select vehicle body type">
+          <span class="text-xs font-mono font-bold uppercase tracking-wider text-gray-400 mr-1">
+            Vehicle:
+          </span>
+          <button
+            type="button"
+            data-v-body="ute"
+            class="v-body-btn ui-btn is-active"
+          >
+            Dual-Cab Ute
+          </button>
+          <button
+            type="button"
+            data-v-body="van"
+            class="v-body-btn ui-btn"
+          >
+            Trade Van
+          </button>
+          <button
+            type="button"
+            data-v-body="wagon"
+            class="v-body-btn ui-btn"
+          >
+            Sport Wagon
+          </button>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="hidden sm:inline-flex items-center gap-1.5 rounded bg-[#1B202C] border border-[#2E3648] px-2.5 py-1 text-[11px] font-mono text-gray-300">
+            <span class="h-2 w-2 rounded-full bg-volt animate-pulse"></span>
+            TIP: DRAG TEXT &amp; LOGO DIRECTLY ON THE VEHICLE
+          </span>
+          <button
+            type="button"
+            id="v-reset-pos-btn"
+            class="ui-btn !py-1.5 !px-3 !text-[11px]"
+            title="Reset text and logo positions to default"
+          >
+            Reset Layout
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Studio Grid: Interactive Vehicle Canvas (Left 7 cols) + Customizer Controls (Right 5 cols) -->
+      <div class="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <!-- LEFT / TOP: INTERACTIVE VEHICLE STAGE -->
+        <div class="lg:col-span-7 flex flex-col justify-between">
+          <div
+            id="vehicle-canvas"
+            class="relative aspect-[16/9] w-full rounded-md bg-[#07080B] border border-[#282E3D] overflow-hidden select-none shadow-inner"
+            style="--wrap-color: #E11D48; --stripe-color: #FFFFFF; --base-paint: #3B4252; --mask-url: url('/assets/img/vehicles/ute-mask.webp');"
+          >
+            <!-- 1. Photorealistic Orthographic Studio Render -->
+            <img
+              id="v-studio-base"
+              src="/assets/img/vehicles/ute-base.webp"
+              width="1376"
+              height="768"
+              alt="Interactive vehicle wrap studio preview"
+              class="h-full w-full object-contain pointer-events-none"
+              crossorigin="anonymous"
+            />
+
+            <!-- 2. Pixel-Exact Masked Paint & Vinyl Wrap Layer -->
+            <div
+              id="v-paint-mask"
+              class="pointer-events-none absolute inset-0"
+              style="
+                -webkit-mask-image: var(--mask-url);
+                mask-image: var(--mask-url);
+                -webkit-mask-size: 100% 100%;
+                mask-size: 100% 100%;
+                -webkit-mask-repeat: no-repeat;
+                mask-repeat: no-repeat;
+                mix-blend-mode: multiply;
+              "
+            >
+              <!-- Factory Paint Base Layer (Unwrapped Panels) -->
+              <div
+                id="v-base-paint-layer"
+                class="absolute inset-0 transition-colors duration-300"
+                style="background-color: var(--base-paint);"
+              ></div>
+
+              <!-- Primary Vinyl Wrap Polygon Layer -->
+              <div
+                id="v-wrap-primary-layer"
+                class="absolute inset-0 transition-colors duration-200"
+                style="background-color: var(--wrap-color); clip-path: polygon(48% 0%, 100% 0%, 100% 100%, 34% 100%);"
+              ></div>
+
+              <!-- Secondary Accent Stripe Polygon Layer 1 -->
+              <div
+                id="v-wrap-stripe-1"
+                class="absolute inset-0 transition-colors duration-200"
+                style="background-color: var(--stripe-color); clip-path: polygon(44.4% 0%, 46.7% 0%, 32.7% 100%, 30.4% 100%);"
+              ></div>
+
+              <!-- Secondary Accent Stripe Polygon Layer 2 -->
+              <div
+                id="v-wrap-stripe-2"
+                class="absolute inset-0 transition-colors duration-200"
+                style="background-color: var(--wrap-color); clip-path: polygon(42.1% 0%, 43.3% 0%, 29.3% 100%, 28.1% 100%);"
+              ></div>
+            </div>
+
+            <!-- 3. Interactive Draggable Signwriting & Uploaded Logo Layer -->
+            <div id="v-decal-layer" class="absolute inset-0 overflow-hidden">
+              <!-- Draggable Uploaded Logo -->
+              <div
+                id="v-drag-logo"
+                data-draggable="logo"
+                hidden
+                class="v-draggable group absolute cursor-grab active:cursor-grabbing rounded border border-transparent hover:border-dashed hover:border-volt/80 p-1 transition-shadow"
+                style="left: 28%; top: 48%; transform: translate(-50%, -50%) scale(1);"
+                title="Drag to reposition your logo"
+              >
+                <img
+                  id="v-uploaded-logo-img"
+                  src=""
+                  alt="Uploaded custom logo"
+                  class="max-h-14 sm:max-h-20 w-auto object-contain pointer-events-none select-none drop-shadow-[0_2px_6px_rgba(0,0,0,0.85)]"
+                />
+              </div>
+
+              <!-- Draggable Primary Door / Panel Brand Typography -->
+              <div
+                id="v-drag-brand"
+                data-draggable="brand"
+                class="v-draggable group absolute cursor-grab active:cursor-grabbing rounded border border-transparent hover:border-dashed hover:border-volt/80 px-2 py-1 transition-shadow"
+                style="left: 48%; top: 55%; transform: translate(-50%, -50%);"
+                title="Click a text line to style it individually, or drag to reposition"
+              >
+                <div
+                  id="v-decal-brand-text"
+                  data-text-zone="brand"
+                  class="v-selectable-text rounded px-1.5 py-0.5 font-display text-sm sm:text-xl md:text-2xl font-black uppercase tracking-wider text-white whitespace-nowrap drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)] cursor-pointer transition-all"
+                  title="Click to edit Door Brand Text style"
+                >
+                  397 GRAPHIX
+                </div>
+                <div id="v-decal-sub-wrap" class="mt-0.5 flex items-center gap-1.5">
+                  <span id="v-decal-accent-bar" class="h-1 w-6 rounded-full shrink-0" style="background-color: var(--wrap-color);"></span>
+                  <span
+                    id="v-decal-sub-text"
+                    data-text-zone="sub"
+                    class="v-selectable-text rounded px-1.5 py-0.5 font-mono text-[8px] sm:text-[10px] font-bold uppercase tracking-widest text-white/95 whitespace-nowrap drop-shadow-[0_1px_4px_rgba(0,0,0,0.95)] cursor-pointer transition-all"
+                    title="Click to edit Tagline style"
+                  >
+                    WRAPS · SIGNAGE · WLG
+                  </span>
+                </div>
+              </div>
+
+              <!-- Draggable Secondary Rear / Contact Decal -->
+              <div
+                id="v-drag-contact"
+                data-draggable="contact"
+                class="v-draggable group absolute cursor-grab active:cursor-grabbing rounded border border-transparent hover:border-dashed hover:border-volt/80 px-2 py-1 transition-shadow"
+                style="left: 79%; top: 48%; transform: translate(-50%, -50%);"
+                title="Click a text line to style it individually, or drag to reposition"
+              >
+                <div
+                  id="v-decal-phone-text"
+                  data-text-zone="phone"
+                  class="v-selectable-text rounded px-1.5 py-0.5 font-mono text-[8px] sm:text-[10px] font-extrabold uppercase tracking-wider text-white whitespace-nowrap drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)] cursor-pointer transition-all"
+                  title="Click to edit Phone Number style"
+                >
+                  022 500 3904
+                </div>
+                <div
+                  id="v-decal-web-text"
+                  data-text-zone="web"
+                  class="v-selectable-text rounded px-1.5 py-0.5 font-mono text-[7px] sm:text-[9px] font-bold uppercase tracking-widest text-white/85 whitespace-nowrap drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)] cursor-pointer transition-all"
+                  title="Click to edit Website Decal style"
+                >
+                  397GRAPHIX.CO.NZ
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. Studio Scale & Spec HUD Overlay -->
+            <div class="pointer-events-none absolute inset-x-4 bottom-2.5 flex items-center justify-between border-t border-white/[0.12] pt-1.5 text-[10px] font-mono text-gray-400">
+              <span>CLICK ANY TEXT ON VEHICLE TO STYLE INDIVIDUALLY · DRAG TO MOVE</span>
+              <span id="v-svg-length" class="text-volt font-bold">5370 MM · DUAL-CAB 4X4 UTE</span>
+            </div>
+          </div>
+
+          <!-- Quick Status & Spec Readout under Vehicle -->
+          <div class="mt-4 rounded-md border border-[#252B3B] bg-[#0E1017] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="space-y-1">
+              <span id="v-blueprint-title" class="block text-xs font-mono uppercase text-volt font-bold">
+                // DUAL-CAB UTE · 397 DIAGONAL SPLIT · GLOSS MOTORSPORT CRIMSON
+              </span>
+              <p id="v-blueprint-desc" class="text-xs sm:text-sm font-medium text-gray-300">
+                Two-tone diagonal cast wrap + twin race stripes + custom die-cut branding
+              </p>
+            </div>
+            <span id="v-color-readout" class="shrink-0 rounded bg-[#1C212E] border border-[#323A4E] px-3 py-1.5 text-xs font-mono font-bold uppercase text-volt">
+              GLOSS MOTORSPORT CRIMSON
+            </span>
+          </div>
+        </div>
+
+        <!-- RIGHT: 3-TAB DESIGNER CONTROL DECK (5 cols) -->
+        <div class="lg:col-span-5 rounded-md border border-[#282E3D] bg-[#0E1017] p-4 sm:p-5 flex flex-col justify-between">
+          <!-- Designer Step Tabs -->
+          <div>
+            <div class="grid grid-cols-3 gap-1.5 rounded bg-[#161A24] p-1 border border-[#282E3D] mb-5" role="tablist">
+              <button
+                type="button"
+                data-v-tab="livery"
+                class="v-tab-btn ui-btn is-active !px-2 !py-2 !text-[11px]"
+              >
+                1. Livery Style
+              </button>
+              <button
+                type="button"
+                data-v-tab="colours"
+                class="v-tab-btn ui-btn !px-2 !py-2 !text-[11px]"
+              >
+                2. Colours
+              </button>
+              <button
+                type="button"
+                data-v-tab="graphics"
+                class="v-tab-btn ui-btn !px-2 !py-2 !text-[11px]"
+              >
+                3. Text &amp; Logo
+              </button>
+            </div>
+
+            <!-- ==========================================
+                 TAB 1: LIVERY & WRAP PATTERN
+            =========================================== -->
+            <div id="v-tab-panel-livery" class="space-y-4">
+              <div>
+                <span class="block text-xs font-mono font-bold uppercase tracking-wider text-gray-300 mb-2.5">
+                  Select Wrap / Livery Pattern
+                </span>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    data-v-pattern="diagonal"
+                    class="v-pattern-btn ui-btn is-active !justify-start !text-left !px-3 !py-2.5"
+                  >
+                    01. 397 Diagonal Split
+                  </button>
+                  <button
+                    type="button"
+                    data-v-pattern="swept"
+                    class="v-pattern-btn ui-btn !justify-start !text-left !px-3 !py-2.5"
+                  >
+                    02. Swept Speed Cut
+                  </button>
+                  <button
+                    type="button"
+                    data-v-pattern="horizon"
+                    class="v-pattern-btn ui-btn !justify-start !text-left !px-3 !py-2.5"
+                  >
+                    03. Lower Rocker Split
+                  </button>
+                  <button
+                    type="button"
+                    data-v-pattern="rearblock"
+                    class="v-pattern-btn ui-btn !justify-start !text-left !px-3 !py-2.5"
+                  >
+                    04. Rear Tray / Cargo
+                  </button>
+                  <button
+                    type="button"
+                    data-v-pattern="full"
+                    class="v-pattern-btn ui-btn !justify-start !text-left !px-3 !py-2.5"
+                  >
+                    05. Full 100% Wrap
+                  </button>
+                  <button
+                    type="button"
+                    data-v-pattern="signwriting"
+                    class="v-pattern-btn ui-btn !justify-start !text-left !px-3 !py-2.5"
+                  >
+                    06. Signwriting Only
+                  </button>
+                </div>
+              </div>
+
+              <!-- Dynamic Livery Split Slider -->
+              <div id="v-split-control-wrap" class="pt-2 border-t border-white/[0.08]">
+                <div class="flex items-center justify-between text-xs font-mono mb-1.5">
+                  <label for="v-split-slider" class="font-bold uppercase text-gray-300">
+                    Wrap Cut Position
+                  </label>
+                  <span id="v-split-readout" class="text-volt font-bold">50% MID-CAB</span>
+                </div>
+                <input
+                  id="v-split-slider"
+                  type="range"
+                  min="25"
+                  max="75"
+                  value="48"
+                  class="w-full accent-[#E11D48] cursor-pointer"
+                />
+                <div class="flex justify-between text-[10px] font-mono text-gray-400 mt-1">
+                  <span>MORE COVERAGE (FRONT)</span>
+                  <span>LESS COVERAGE (REAR)</span>
+                </div>
+              </div>
+
+              <!-- Accent Stripes Toggle -->
+              <div class="pt-2 border-t border-white/[0.08] flex items-center justify-between">
+                <span class="text-xs font-mono font-bold uppercase text-gray-300">
+                  Livery Accent Stripes
+                </span>
+                <div class="flex gap-1.5">
+                  <button
+                    type="button"
+                    data-v-stripes="on"
+                    class="v-stripes-btn ui-btn is-active !py-1.5 !px-3"
+                  >
+                    Stripes On
+                  </button>
+                  <button
+                    type="button"
+                    data-v-stripes="off"
+                    class="v-stripes-btn ui-btn !py-1.5 !px-3"
+                  >
+                    Clean / Off
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- ==========================================
+                 TAB 2: COLOURS & FILM FINISH
+            =========================================== -->
+            <div id="v-tab-panel-colours" hidden class="space-y-4">
+              <!-- Primary Vinyl Wrap Colour -->
+              <div>
+                <span class="block text-xs font-mono font-bold uppercase tracking-wider text-gray-300 mb-2">
+                  Primary Vinyl Wrap Colour
+                </span>
+                <div class="flex flex-wrap items-center gap-2">
+                  <button
+                    type="button"
+                    data-v-color="#E11D48"
+                    data-v-color-name="Motorsport Crimson"
+                    aria-label="Motorsport Crimson"
+                    class="v-color-swatch h-7 w-7 rounded border-2 border-white bg-[#E11D48] transition-transform scale-110"
+                  ></button>
+                  <button
+                    type="button"
+                    data-v-color="#F8FAFC"
+                    data-v-color-name="Alpine White"
+                    aria-label="Alpine White"
+                    class="v-color-swatch h-7 w-7 rounded border border-white/40 bg-[#F8FAFC] transition-transform hover:scale-110"
+                  ></button>
+                  <button
+                    type="button"
+                    data-v-color="#8B5CF6"
+                    data-v-color-name="Midnight Purple"
+                    aria-label="Midnight Purple"
+                    class="v-color-swatch h-7 w-7 rounded border border-white/40 bg-[#8B5CF6] transition-transform hover:scale-110"
+                  ></button>
+                  <button
+                    type="button"
+                    data-v-color="#00E5FF"
+                    data-v-color-name="Electric Cyan"
+                    aria-label="Electric Cyan"
+                    class="v-color-swatch h-7 w-7 rounded border border-white/40 bg-[#00E5FF] transition-transform hover:scale-110"
+                  ></button>
+                  <button
+                    type="button"
+                    data-v-color="#FF5500"
+                    data-v-color-name="Safety Orange"
+                    aria-label="Safety Orange"
+                    class="v-color-swatch h-7 w-7 rounded border border-white/40 bg-[#FF5500] transition-transform hover:scale-110"
+                  ></button>
+                  <button
+                    type="button"
+                    data-v-color="#10B981"
+                    data-v-color-name="Emerald Green"
+                    aria-label="Emerald Green"
+                    class="v-color-swatch h-7 w-7 rounded border border-white/40 bg-[#10B981] transition-transform hover:scale-110"
+                  ></button>
+                  <button
+                    type="button"
+                    data-v-color="#3B82F6"
+                    data-v-color-name="Cobalt Blue"
+                    aria-label="Cobalt Blue"
+                    class="v-color-swatch h-7 w-7 rounded border border-white/40 bg-[#3B82F6] transition-transform hover:scale-110"
+                  ></button>
+
+                  <label
+                    class="inline-flex items-center gap-1.5 rounded border border-[#363E4F] bg-[#1E2330] px-2.5 py-1 text-[11px] font-mono font-bold uppercase text-white cursor-pointer hover:border-volt"
+                  >
+                    <input
+                      id="v-custom-color"
+                      type="color"
+                      value="#E11D48"
+                      class="h-4 w-4 cursor-pointer border-0 bg-transparent p-0"
+                    />
+                    <span>Custom</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Vinyl Film Finish -->
+              <div class="pt-3 border-t border-white/[0.08]">
+                <span class="block text-xs font-mono font-bold uppercase tracking-wider text-gray-300 mb-2">
+                  Cast Vinyl Film Finish
+                </span>
+                <div class="grid grid-cols-3 gap-2">
+                  <button type="button" data-v-finish="Gloss" class="v-finish-btn ui-btn is-active">
+                    Gloss
+                  </button>
+                  <button type="button" data-v-finish="Satin" class="v-finish-btn ui-btn">
+                    Satin
+                  </button>
+                  <button type="button" data-v-finish="Matte" class="v-finish-btn ui-btn">
+                    Matte
+                  </button>
+                </div>
+              </div>
+
+              <!-- Secondary Accent Stripe Colour -->
+              <div class="pt-3 border-t border-white/[0.08]">
+                <span class="block text-xs font-mono font-bold uppercase tracking-wider text-gray-300 mb-2">
+                  Accent Stripe Colour
+                </span>
+                <div class="flex flex-wrap items-center gap-2">
+                  <button
+                    type="button"
+                    data-v-stripe-color="#FFFFFF"
+                    class="v-stripe-swatch h-6 w-6 rounded border-2 border-volt bg-[#FFFFFF]"
+                    aria-label="White Stripe"
+                  ></button>
+                  <button
+                    type="button"
+                    data-v-stripe-color="#E11D48"
+                    class="v-stripe-swatch h-6 w-6 rounded border border-white/40 bg-[#E11D48]"
+                    aria-label="Crimson Stripe"
+                  ></button>
+                  <button
+                    type="button"
+                    data-v-stripe-color="#181C24"
+                    class="v-stripe-swatch h-6 w-6 rounded border border-white/40 bg-[#181C24]"
+                    aria-label="Carbon Black Stripe"
+                  ></button>
+                  <button
+                    type="button"
+                    data-v-stripe-color="#00E5FF"
+                    class="v-stripe-swatch h-6 w-6 rounded border border-white/40 bg-[#00E5FF]"
+                    aria-label="Cyan Stripe"
+                  ></button>
+                  <button
+                    type="button"
+                    data-v-stripe-color="#FF5500"
+                    class="v-stripe-swatch h-6 w-6 rounded border border-white/40 bg-[#FF5500]"
+                    aria-label="Orange Stripe"
+                  ></button>
+                  <button
+                    type="button"
+                    data-v-stripe-color="#94A3B8"
+                    class="v-stripe-swatch h-6 w-6 rounded border border-white/40 bg-[#94A3B8]"
+                    aria-label="Silver Metallic Stripe"
+                  ></button>
+
+                  <label
+                    class="inline-flex items-center gap-1.5 rounded border border-[#363E4F] bg-[#1E2330] px-2.5 py-1 text-[11px] font-mono font-bold uppercase text-white cursor-pointer hover:border-volt"
+                    title="Pick any custom accent stripe colour"
+                  >
+                    <input
+                      id="v-custom-stripe-color"
+                      type="color"
+                      value="#FFFFFF"
+                      class="h-4 w-4 cursor-pointer border-0 bg-transparent p-0"
+                    />
+                    <span>Custom</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Unwrapped Base Vehicle Paint -->
+              <div class="pt-3 border-t border-white/[0.08]">
+                <span class="block text-xs font-mono font-bold uppercase tracking-wider text-gray-300 mb-2">
+                  Base Vehicle Paint (Unwrapped Panels)
+                </span>
+                <div class="flex flex-wrap items-center gap-2">
+                  <button
+                    type="button"
+                    data-v-base-paint="#3B4252"
+                    class="v-base-swatch ui-btn is-active !py-1 !px-2.5 !text-[11px]"
+                  >
+                    Gunmetal
+                  </button>
+                  <button
+                    type="button"
+                    data-v-base-paint="#F1F5F9"
+                    class="v-base-swatch ui-btn !py-1 !px-2.5 !text-[11px]"
+                  >
+                    Factory White
+                  </button>
+                  <button
+                    type="button"
+                    data-v-base-paint="#1B1E26"
+                    class="v-base-swatch ui-btn !py-1 !px-2.5 !text-[11px]"
+                  >
+                    Jet Black
+                  </button>
+                  <button
+                    type="button"
+                    data-v-base-paint="#94A3B8"
+                    class="v-base-swatch ui-btn !py-1 !px-2.5 !text-[11px]"
+                  >
+                    Silver
+                  </button>
+                  <button
+                    type="button"
+                    data-v-base-paint="#1E3A8A"
+                    class="v-base-swatch ui-btn !py-1 !px-2.5 !text-[11px]"
+                  >
+                    Deep Navy
+                  </button>
+
+                  <label
+                    class="inline-flex items-center gap-1.5 rounded border border-[#363E4F] bg-[#1E2330] px-2.5 py-1 text-[11px] font-mono font-bold uppercase text-white cursor-pointer hover:border-volt"
+                    title="Pick any custom factory paint colour"
+                  >
+                    <input
+                      id="v-custom-base-paint"
+                      type="color"
+                      value="#3B4252"
+                      class="h-4 w-4 cursor-pointer border-0 bg-transparent p-0"
+                    />
+                    <span>Custom Paint</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- ==========================================
+                 TAB 3: CUSTOM TEXT & UPLOAD LOGO
+            =========================================== -->
+            <div id="v-tab-panel-graphics" hidden class="space-y-3.5">
+              <!-- Upload Custom Logo -->
+              <div class="rounded border border-[#2C3342] bg-[#161A24] p-3">
+                <div class="flex items-center justify-between gap-2 mb-2">
+                  <span class="text-xs font-mono font-bold uppercase text-volt">
+                    Upload Your Logo (PNG / SVG / JPG)
+                  </span>
+                  <button
+                    type="button"
+                    id="v-logo-clear-btn"
+                    hidden
+                    class="text-[11px] font-mono font-bold uppercase text-red-400 hover:underline"
+                  >
+                    Remove Logo
+                  </button>
+                </div>
+                <div class="flex flex-wrap items-center gap-2">
+                  <label class="ui-btn cursor-pointer !py-1.5 !px-3 !text-xs">
+                    <input
+                      id="v-logo-upload"
+                      type="file"
+                      accept="image/png,image/jpeg,image/webp,image/svg+xml"
+                      class="sr-only"
+                    />
+                    <span>+ Choose Logo File</span>
+                  </label>
+                  <div class="flex items-center gap-2 flex-1 min-w-[120px]">
+                    <span class="text-[10px] font-mono uppercase text-gray-400">Size:</span>
+                    <input
+                      id="v-logo-scale"
+                      type="range"
+                      min="50"
+                      max="180"
+                      value="100"
+                      class="w-full accent-[#E11D48] cursor-pointer"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Door Brand Name & Tagline -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <div>
+                  <label for="v-brand-input" class="block text-[11px] font-mono font-bold uppercase text-gray-300 mb-1">
+                    Main Brand Text
+                  </label>
+                  <input
+                    id="v-brand-input"
+                    type="text"
+                    maxlength="20"
+                    value="397 GRAPHIX"
+                    placeholder="YOUR COMPANY"
+                    class="w-full rounded border border-[#363E4F] bg-[#1E2330] px-2.5 py-1.5 font-heading text-xs font-bold uppercase text-white focus:border-volt focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label for="v-sub-input" class="block text-[11px] font-mono font-bold uppercase text-gray-300 mb-1">
+                    Tagline / Trade
+                  </label>
+                  <input
+                    id="v-sub-input"
+                    type="text"
+                    maxlength="28"
+                    value="WRAPS · SIGNAGE · WLG"
+                    placeholder="ELECTRICAL · WELLINGTON"
+                    class="w-full rounded border border-[#363E4F] bg-[#1E2330] px-2.5 py-1.5 font-mono text-xs font-bold uppercase text-white focus:border-volt focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              <!-- Phone & Website Decal Inputs -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <div>
+                  <label for="v-phone-input" class="block text-[11px] font-mono font-bold uppercase text-gray-300 mb-1">
+                    Rear Phone Decal
+                  </label>
+                  <input
+                    id="v-phone-input"
+                    type="text"
+                    maxlength="18"
+                    value="022 500 3904"
+                    placeholder="022 500 3904"
+                    class="w-full rounded border border-[#363E4F] bg-[#1E2330] px-2.5 py-1.5 font-mono text-xs font-bold uppercase text-white focus:border-volt focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label for="v-web-input" class="block text-[11px] font-mono font-bold uppercase text-gray-300 mb-1">
+                    Website / Social Decal
+                  </label>
+                  <input
+                    id="v-web-input"
+                    type="text"
+                    maxlength="24"
+                    value="397GRAPHIX.CO.NZ"
+                    placeholder="YOURSITE.CO.NZ"
+                    class="w-full rounded border border-[#363E4F] bg-[#1E2330] px-2.5 py-1.5 font-mono text-xs font-bold uppercase text-white focus:border-volt focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              <!-- Active Text Area Selector (Click on Car or Pick Here) -->
+              <div class="pt-2 border-t border-white/[0.08]">
+                <div class="flex items-center justify-between gap-2 mb-1.5">
+                  <span class="text-[11px] font-mono font-bold uppercase text-volt">
+                    Editing Text Area: <span id="v-active-zone-label" class="text-white">Door Title</span>
+                  </span>
+                  <span class="text-[10px] font-mono text-gray-400">Click text on vehicle or below</span>
+                </div>
+                <div class="grid grid-cols-5 gap-1" role="group" aria-label="Select which text area to style">
+                  <button
+                    type="button"
+                    data-v-zone="brand"
+                    class="v-zone-btn ui-btn is-active !px-1.5 !py-1 !text-[10px]"
+                  >
+                    Door Title
+                  </button>
+                  <button
+                    type="button"
+                    data-v-zone="sub"
+                    class="v-zone-btn ui-btn !px-1.5 !py-1 !text-[10px]"
+                  >
+                    Tagline
+                  </button>
+                  <button
+                    type="button"
+                    data-v-zone="phone"
+                    class="v-zone-btn ui-btn !px-1.5 !py-1 !text-[10px]"
+                  >
+                    Phone
+                  </button>
+                  <button
+                    type="button"
+                    data-v-zone="web"
+                    class="v-zone-btn ui-btn !px-1.5 !py-1 !text-[10px]"
+                  >
+                    Website
+                  </button>
+                  <button
+                    type="button"
+                    data-v-zone="all"
+                    class="v-zone-btn ui-btn !px-1.5 !py-1 !text-[10px]"
+                  >
+                    All Text
+                  </button>
+                </div>
+              </div>
+
+              <!-- Signwriting Font Style Picker -->
+              <div class="pt-2 border-t border-white/[0.08]">
+                <span class="block text-[11px] font-mono font-bold uppercase text-gray-300 mb-1.5">
+                  Font Style (Selected Area)
+                </span>
+                <div class="grid grid-cols-3 gap-1.5" role="group" aria-label="Select signwriting font style">
+                  <button
+                    type="button"
+                    data-v-font="wide"
+                    class="v-font-btn ui-btn is-active !px-2 !py-1.5 !text-[11px]"
+                  >
+                    Wide Block
+                  </button>
+                  <button
+                    type="button"
+                    data-v-font="italic"
+                    class="v-font-btn ui-btn !px-2 !py-1.5 !text-[11px] italic"
+                  >
+                    Speed Italic
+                  </button>
+                  <button
+                    type="button"
+                    data-v-font="condensed"
+                    class="v-font-btn ui-btn !px-2 !py-1.5 !text-[11px]"
+                  >
+                    Tall Trade
+                  </button>
+                  <button
+                    type="button"
+                    data-v-font="clean"
+                    class="v-font-btn ui-btn !px-2 !py-1.5 !text-[11px]"
+                  >
+                    Clean Sans
+                  </button>
+                  <button
+                    type="button"
+                    data-v-font="serif"
+                    class="v-font-btn ui-btn !px-2 !py-1.5 !text-[11px]"
+                    style="font-family: Georgia, serif;"
+                  >
+                    Classic Serif
+                  </button>
+                  <button
+                    type="button"
+                    data-v-font="mono"
+                    class="v-font-btn ui-btn !px-2 !py-1.5 !text-[11px]"
+                  >
+                    Tech Mono
+                  </button>
+                </div>
+              </div>
+
+              <!-- Text Colour & Scale -->
+              <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-white/[0.08]">
+                <div class="flex items-center gap-1.5">
+                  <span class="text-[11px] font-mono font-bold uppercase text-gray-300 mr-1">Text:</span>
+                  <button
+                    type="button"
+                    data-v-text-color="#FFFFFF"
+                    class="v-text-swatch h-6 w-6 rounded border-2 border-volt bg-[#FFFFFF]"
+                    aria-label="White Text"
+                  ></button>
+                  <button
+                    type="button"
+                    data-v-text-color="#E11D48"
+                    class="v-text-swatch h-6 w-6 rounded border border-white/40 bg-[#E11D48]"
+                    aria-label="Crimson Red Text"
+                  ></button>
+                  <button
+                    type="button"
+                    data-v-text-color="#0B0D13"
+                    class="v-text-swatch h-6 w-6 rounded border border-white/40 bg-[#0B0D13]"
+                    aria-label="Matte Black Text"
+                  ></button>
+                  <button
+                    type="button"
+                    data-v-text-color="#00E5FF"
+                    class="v-text-swatch h-6 w-6 rounded border border-white/40 bg-[#00E5FF]"
+                    aria-label="Cyan Text"
+                  ></button>
+
+                  <label
+                    class="inline-flex items-center gap-1.5 rounded border border-[#363E4F] bg-[#1E2330] px-2 py-1 text-[11px] font-mono font-bold uppercase text-white cursor-pointer hover:border-volt"
+                    title="Pick any custom decal text colour"
+                  >
+                    <input
+                      id="v-custom-text-color"
+                      type="color"
+                      value="#FFFFFF"
+                      class="h-4 w-4 cursor-pointer border-0 bg-transparent p-0"
+                    />
+                    <span>Custom</span>
+                  </label>
+                </div>
+
+                <div class="flex items-center gap-2 flex-1 max-w-[160px]">
+                  <span class="text-[11px] font-mono font-bold uppercase text-gray-300">Size:</span>
+                  <input
+                    id="v-text-scale"
+                    type="range"
+                    min="70"
+                    max="145"
+                    value="100"
+                    class="w-full accent-[#E11D48] cursor-pointer"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Export & Quote Actions -->
+          <div class="mt-6 pt-4 border-t border-white/[0.1] space-y-2.5">
+            <a
+              id="v-quote-link"
+              href="/contact?service=vehicle-wraps#quote"
+              class="btn-primary w-full"
+            >
+              <span>Send Design to Ryan for Quote</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+            <button
+              type="button"
+              id="v-download-png-btn"
+              class="btn-secondary w-full !py-2.5"
+            >
+              <span>Download Design Proof (.PNG)</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =====================================================
+         MODE 2: OFFICE GLASS FROSTING STUDIO
+    ====================================================== -->
+    <div id="cfg-panel-glass" hidden class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+      <div class="lg:col-span-4 flex flex-col justify-between space-y-3">
+        <div class="text-xs font-mono font-bold uppercase tracking-wider text-gray-400">
+          Step 1 — Select Frosting Height
+        </div>
+
+        <button
+          type="button"
+          data-g-tier="1"
+          class="g-tier-btn ui-tier-card"
+        >
+          <div class="flex items-center justify-between font-mono text-[11px] mb-1.5">
+            <span class="text-gray-300 font-bold">SPEC 01 · COMPLIANCE</span>
+            <span class="rounded bg-[#252B3B] px-2 py-0.5 text-volt font-bold">PRIVACY: 20%</span>
+          </div>
+          <h3 class="font-heading text-lg font-bold text-white">Safety Manifestation Strips</h3>
+          <p class="mt-1.5 text-xs sm:text-sm text-gray-300 leading-relaxed">
+            Precision-cut manifestation bands and room numbering (e.g. 11.01) to meet NZ building safety codes on clear glass.
+          </p>
+        </button>
+
+        <button
+          type="button"
+          data-g-tier="2"
+          class="g-tier-btn ui-tier-card is-active"
+        >
+          <div class="flex items-center justify-between font-mono text-[11px] mb-1.5">
+            <span class="text-volt font-bold">SPEC 02 · BOARDROOM STANDARD</span>
+            <span class="rounded bg-volt px-2 py-0.5 text-obsidian font-extrabold">PRIVACY: 75%</span>
+          </div>
+          <h3 class="font-heading text-lg font-bold text-white">Mid-Height Privacy Band (1200mm)</h3>
+          <p class="mt-1.5 text-xs sm:text-sm text-gray-200 leading-relaxed">
+            Eye-level etched glass band with negative-space pinstripes. Blocks seated corridor distractions while keeping ceiling light open.
+          </p>
+        </button>
+
+        <button
+          type="button"
+          data-g-tier="3"
+          class="g-tier-btn ui-tier-card"
+        >
+          <div class="flex items-center justify-between font-mono text-[11px] mb-1.5">
+            <span class="text-gray-300 font-bold">SPEC 03 · EXECUTIVE PRIVACY</span>
+            <span class="rounded bg-[#252B3B] px-2 py-0.5 text-volt font-bold">PRIVACY: 95%</span>
+          </div>
+          <h3 class="font-heading text-lg font-bold text-white">Full-Height Partition Frosting</h3>
+          <p class="mt-1.5 text-xs sm:text-sm text-gray-300 leading-relaxed">
+            Floor-to-ceiling polymeric etch film across meeting rooms and open-plan partitions for total visual privacy.
+          </p>
+        </button>
+      </div>
+
+      <!-- Interactive Glass Partition Visualizer -->
+      <div class="lg:col-span-8 rounded-md border border-[#2C3342] bg-[#13161F] p-5 sm:p-7 flex flex-col justify-between">
+        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/[0.1] pb-4">
+          <div>
+            <span class="block text-[11px] font-mono font-bold uppercase tracking-wider text-gray-400 mb-2">
+              Step 2 — Select Film Tint
+            </span>
+            <div class="flex flex-wrap gap-2">
+              <button
+                type="button"
+                data-g-tint="silver"
+                class="g-tint-btn ui-btn is-active"
+              >
+                Silver Etch (Classic)
+              </button>
+              <button
+                type="button"
+                data-g-tint="ice"
+                class="g-tint-btn ui-btn"
+              >
+                Ice White Frost
+              </button>
+              <button
+                type="button"
+                data-g-tint="smoke"
+                class="g-tint-btn ui-btn"
+              >
+                Smoked Charcoal
+              </button>
+
+              <label
+                class="inline-flex items-center gap-2 rounded border border-[#363E4F] bg-[#1E2330] px-3 py-1.5 text-xs font-mono font-bold uppercase text-white cursor-pointer hover:border-volt"
+                title="Pick any custom coloured glass tint"
+              >
+                <input
+                  id="g-custom-tint-color"
+                  type="color"
+                  value="#38BDF8"
+                  class="h-4 w-4 cursor-pointer border-0 bg-transparent p-0"
+                />
+                <span>Custom Tint</span>
+              </label>
+            </div>
+          </div>
+
+          <span id="g-blueprint-light" class="text-xs font-mono text-volt font-bold">
+            LIGHT TRANSMISSION: 88%
+          </span>
+        </div>
+
+        <!-- 4-Panel Architectural Glass Elevation Simulation -->
+        <div class="my-5 relative h-64 sm:h-72 rounded bg-gradient-to-b from-zinc-900 via-zinc-950 to-black border-2 border-zinc-700 grid grid-cols-4 overflow-hidden">
+          <div class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center opacity-35">
+            <div class="w-4/5 h-28 border border-white/30 flex items-center justify-around bg-white/[0.03]">
+              <span class="font-mono text-xs text-white/70">BOARDROOM TABLE // SEATED EYE LEVEL</span>
+            </div>
+          </div>
+
+          <div
+            id="glass-sim-band"
+            class="pointer-events-none absolute inset-x-0 top-[26%] bottom-[24%] bg-white/[0.36] backdrop-blur-md border-y-2 border-volt transition-all duration-500 flex flex-col justify-between py-2"
+          >
+            <div class="border-t border-white/60 w-full"></div>
+            <div class="px-6 flex items-center justify-between">
+              <span class="font-heading text-base sm:text-lg font-extrabold text-obsidian">SUITE 9.7 // PRIVACY FROST</span>
+              <span class="font-mono text-xs font-bold text-obsidian">1200MM BAND</span>
+            </div>
+            <div class="border-b border-white/60 w-full"></div>
+          </div>
+
+          <div class="border-r border-white/20 h-full"></div>
+          <div class="border-r border-white/20 h-full"></div>
+          <div class="border-r border-white/20 h-full"></div>
+          <div class="h-full"></div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-white/[0.1]">
+          <div class="space-y-1">
+            <span id="g-blueprint-title" class="block text-xs font-mono uppercase text-volt font-bold">
+              // SPEC 02 BOARDROOM BAND · SILVER ETCH FILM
+            </span>
+            <p id="g-blueprint-desc" class="text-sm font-medium text-gray-200">
+              Mid-height polymeric etched glass band + twin pinstripes + cut-vinyl room numbering
+            </p>
+          </div>
+          <a
+            id="g-quote-link"
+            href="/contact?service=office-fitouts&tier=Spec%2002%20Boardroom%20Privacy%20Band%20(Silver%20Etch)#quote"
+            class="btn-primary shrink-0"
+          >
+            <span>Quote This Glass Spec</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

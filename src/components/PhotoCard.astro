@@ -1,0 +1,68 @@
+---
+import type { PhotoItem } from '../data/site';
+
+interface Props {
+  photo: PhotoItem;
+  aspectClass?: string;
+  eager?: boolean;
+  index?: number;
+}
+
+const {
+  photo,
+  aspectClass = 'aspect-[4/3]',
+  eager = false,
+} = Astro.props;
+---
+
+<a
+  href={photo.src}
+  data-caption={photo.caption}
+  data-tag={photo.tag}
+  data-cat={photo.categories.join(' ')}
+  class="shot material-card group relative block focus:outline-none"
+>
+  <!-- Top Technical Bar -->
+  <div class="flex items-center justify-between border-b border-white/[0.08] bg-[#0B0D12] px-4 py-2.5 text-xs font-mono uppercase tracking-wider text-gray-400">
+    <span class="flex items-center gap-2">
+      <span class="h-1.5 w-1.5 rounded-full bg-volt"></span>
+      <span class="text-white font-bold">{photo.tag}</span>
+    </span>
+    <span>{photo.location || 'Wellington, NZ'}</span>
+  </div>
+
+  <div class:list={['relative w-full overflow-hidden bg-surface', aspectClass]}>
+    <img
+      src={photo.srcSm}
+      srcset={`${photo.srcSm} 800w, ${photo.src} ${photo.width}w`}
+      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      width={photo.width}
+      height={photo.height}
+      alt={photo.alt}
+      loading={eager ? 'eager' : 'lazy'}
+      decoding="async"
+      class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+    />
+    <div
+      class="pointer-events-none absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/25 to-transparent opacity-90"
+    ></div>
+
+    <!-- Hover Inspect Badge -->
+    <div
+      class="absolute top-3 right-3 flex items-center gap-1.5 rounded bg-volt px-2.5 py-1 text-[11px] font-mono font-extrabold uppercase tracking-wider text-obsidian opacity-0 translate-y-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0"
+      aria-hidden="true"
+    >
+      <span>View Full Size +</span>
+    </div>
+
+    <!-- Bottom Caption Overlay -->
+    <div class="absolute inset-x-0 bottom-0 p-5">
+      <h3 class="font-heading text-lg sm:text-xl font-bold text-white group-hover:text-volt transition-colors leading-snug">
+        {photo.title}
+      </h3>
+      <p class="mt-1 text-xs sm:text-sm text-gray-300 line-clamp-1">
+        {photo.caption}
+      </p>
+    </div>
+  </div>
+</a>

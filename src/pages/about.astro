@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { SITE, PHOTOS, PROCESS_STEPS, VALUES } from '../data/site';
+---
+
+<BaseLayout
+  title="About 397 Graphix | Wellington Wraps, Signage & Fit-outs"
+  description="397 Graphix is a Wellington signage, vehicle wrap, and commercial office fit-out studio run by Ryan. Direct communication from design to installation."
+  canonicalPath="about"
+  currentPage="/about"
+>
+  <PageHeader
+    eyebrow="STUDIO // OWNER-OPERATED"
+    title="SMALL CREW. OBSESSIVE FINISH."
+    description="A Wellington wrap, signage, and fit-out workshop built on proper prep, razor-sharp lines, and dealing directly with the person doing the work."
+  />
+
+  <section class="py-16 sm:py-24 border-b border-white/[0.1]">
+    <div class="container-wrap">
+      <div class="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
+        <div class="lg:col-span-7 space-y-6">
+          <span class="eyebrow-badge">DIRECT TO THE INSTALLER</span>
+          <h2 class="font-display text-3xl sm:text-5xl text-white">
+            NO ACCOUNT MANAGERS. <span class="text-volt">NO BROKEN TELEPHONE.</span>
+          </h2>
+          <p class="text-base sm:text-lg text-gray-200 leading-relaxed">
+            397 Graphix is run by {SITE.owner}, who looks after every project from the initial site measure and layout proof through to the final squeegee pass.
+          </p>
+          <p class="text-base text-gray-400 leading-relaxed">
+            In big sign franchises, your job gets passed from a sales rep to a junior designer to a sub-contracted installer—and that is where details get missed. Here, you deal directly with the person cutting the vinyl and fitting it on site.
+          </p>
+          <p class="text-base text-gray-400 leading-relaxed">
+            Whether it is a single ute rear window decal, a two-tone commercial wrap, or multi-floor privacy frosting across a corporate floor in the Wellington CBD, the rule is simple: measure twice, decontaminate and prep the surface properly, and tuck every edge so it still looks crisp years from now.
+          </p>
+
+          <div class="pt-4 flex flex-wrap gap-4">
+            <a href="/contact#quote" class="btn-primary">
+              <span>TALK TO RYAN ABOUT A JOB</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+            <a href="/gallery" class="btn-secondary">
+              <span>INSPECT RECENT WORK</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5">
+          <div class="material-card reg-mark p-4">
+            <div class="aspect-[4/4] overflow-hidden border border-white/[0.1]">
+              <img
+                src={PHOTOS['frosting-door'].srcSm}
+                srcset={`${PHOTOS['frosting-door'].srcSm} 800w, ${PHOTOS['frosting-door'].src} ${PHOTOS['frosting-door'].width}w`}
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                width={PHOTOS['frosting-door'].width}
+                height={PHOTOS['frosting-door'].height}
+                alt={PHOTOS['frosting-door'].alt}
+                class="h-full w-full object-cover"
+              />
+            </div>
+            <div class="pt-4 flex items-center justify-between text-xs font-mono text-gray-400">
+              <span>ROOM 11.05 // ETCHED GLASS &amp; CUT VINYL</span>
+              <span class="text-volt font-bold">WLG CBD</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Grid -->
+  <section class="py-16 sm:py-24 bg-charcoal border-b border-white/[0.1]">
+    <div class="container-wrap">
+      <div class="max-w-2xl mb-12">
+        <span class="eyebrow-badge mb-4">STANDARDS // WHY 397</span>
+        <h2 class="font-display text-3xl sm:text-5xl text-white">
+          HOW WE OPERATE.
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          VALUES.map((v, i) => (
+            <div class="material-card p-7">
+              <span class="font-mono text-xs text-volt font-bold block mb-4">
+                // 0{i + 1}
+              </span>
+              <h3 class="font-heading text-lg font-extrabold tracking-tight text-white">{v.title}</h3>
+              <p class="mt-3 text-sm text-gray-300 leading-relaxed">
+                {v.description}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section class="py-16 sm:py-24">
+    <div class="container-wrap">
+      <div class="max-w-2xl mb-12">
+        <span class="eyebrow-badge mb-4">THE BLUEPRINT</span>
+        <h2 class="font-display text-3xl sm:text-5xl text-white">
+          FOUR STEPS. <span class="text-volt">NO SURPRISES.</span>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          PROCESS_STEPS.map((item) => (
+            <div class="reg-mark border border-[#282E3D] bg-[#13161F] p-7">
+              <span class="font-display text-4xl text-stroke-volt block mb-4">
+                {item.step}
+              </span>
+              <h3 class="font-heading text-lg font-extrabold tracking-tight text-white">{item.title}</h3>
+              <p class="mt-2.5 text-sm text-gray-300 leading-relaxed">
+                {item.description}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

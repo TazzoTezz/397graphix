@@ -1,0 +1,116 @@
+---
+---
+
+<section class="py-20 sm:py-28 border-b border-white/[0.1] bg-[#0D0F14] relative overflow-hidden">
+  <div class="bg-grid-pattern pointer-events-none absolute inset-0 opacity-50"></div>
+
+  <div class="container-wrap relative z-10">
+    <div class="rounded-lg border-2 border-[#2C3342] bg-[#13161F] p-6 sm:p-10 lg:p-12 shadow-2xl">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <!-- Left Copy & Studio Launch Actions -->
+        <div class="lg:col-span-6 space-y-5">
+          <span class="eyebrow-badge">INTERACTIVE 3D WRAP &amp; SIGNAGE LAB</span>
+          <h2 class="font-display text-3xl sm:text-5xl text-white">
+            DESIGN YOUR WRAP OR 3D SIGN <span class="text-volt">LIVE ONLINE.</span>
+          </h2>
+          <p class="text-sm sm:text-base text-gray-300 leading-relaxed">
+            Step into our interactive studio to test 6 commercial wrap patterns, custom vinyl colours, and finishes on a <strong class="text-white">Dual-Cab Ute, Trade Van, or Sport Wagon</strong>. Upload your own company logo, drag your signwriting into place, download a <code class="text-volt font-mono">.PNG</code> studio proof, or send your exact design straight to Ryan for a quote.
+          </p>
+
+          <!-- Feature Pills -->
+          <div class="flex flex-wrap gap-2 pt-1">
+            <span class="rounded border border-[#2E3648] bg-[#1A1F2B] px-3 py-1 font-mono text-xs font-bold text-volt">
+              + Upload Your Logo
+            </span>
+            <span class="rounded border border-[#2E3648] bg-[#1A1F2B] px-3 py-1 font-mono text-xs font-bold text-gray-200">
+              + Drag &amp; Drop Signwriting
+            </span>
+            <span class="rounded border border-[#2E3648] bg-[#1A1F2B] px-3 py-1 font-mono text-xs font-bold text-gray-200">
+              + 6 Font &amp; Livery Styles
+            </span>
+            <span class="rounded border border-[#2E3648] bg-[#1A1F2B] px-3 py-1 font-mono text-xs font-bold text-gray-200">
+              + Instant .PNG Proof
+            </span>
+          </div>
+
+          <div class="pt-3 flex flex-wrap items-center gap-3.5">
+            <a href="/studio#configurator" class="btn-primary">
+              <span>Launch Vehicle Wrap Studio</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+            <a href="/studio#simulator" class="btn-secondary">
+              <span>3D &amp; LED Sign Simulator</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Visual Preview Portal -->
+        <div class="lg:col-span-6">
+          <a
+            href="/studio"
+            class="group block relative aspect-[16/9] w-full rounded-md bg-[#07080B] border border-[#2E3648] hover:border-volt overflow-hidden transition-all duration-300 shadow-xl"
+          >
+            <!-- Studio Ute Base -->
+            <img
+              src="/assets/img/vehicles/ute-base.webp"
+              width="1376"
+              height="768"
+              loading="lazy"
+              alt="397 Graphix Interactive Vehicle Wrap Studio Preview"
+              class="h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+            />
+
+            <!-- Masked Signal Volt Two-Tone Livery Preview -->
+            <div
+              class="pointer-events-none absolute inset-0 transition-transform duration-500 group-hover:scale-[1.03]"
+              style="
+                -webkit-mask-image: url('/assets/img/vehicles/ute-mask.webp');
+                mask-image: url('/assets/img/vehicles/ute-mask.webp');
+                -webkit-mask-size: 100% 100%;
+                mask-size: 100% 100%;
+                mix-blend-mode: multiply;
+              "
+            >
+              <div class="absolute inset-0 bg-[#3B4252]"></div>
+              <div
+                class="absolute inset-0 bg-[#E11D48]"
+                style="clip-path: polygon(48% 0%, 100% 0%, 100% 100%, 34% 100%);"
+              ></div>
+              <div
+                class="absolute inset-0 bg-white"
+                style="clip-path: polygon(44.4% 0%, 46.7% 0%, 32.7% 100%, 30.4% 100%);"
+              ></div>
+              <div
+                class="absolute inset-0 bg-[#E11D48]"
+                style="clip-path: polygon(42.1% 0%, 43.3% 0%, 29.3% 100%, 28.1% 100%);"
+              ></div>
+            </div>
+
+            <!-- Simulated Draggable Door Decal Overlay -->
+            <div
+              class="pointer-events-none absolute rounded border border-dashed border-volt/80 bg-black/25 px-2.5 py-1"
+              style="left: 48%; top: 55%; transform: translate(-50%, -50%);"
+            >
+              <div class="font-display text-sm sm:text-xl font-black uppercase tracking-wider text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
+                397 GRAPHIX
+              </div>
+              <div class="font-mono text-[8px] sm:text-[10px] font-bold uppercase tracking-widest text-volt">
+                DRAG TO POSITION
+              </div>
+            </div>
+
+            <!-- Top Floating HUD Badges -->
+            <div class="pointer-events-none absolute top-3 left-3 right-3 flex items-center justify-between gap-2">
+              <span class="rounded bg-[#13161F]/90 border border-white/15 px-2.5 py-1 font-mono text-[10px] font-bold uppercase text-volt">
+                // UTE · VAN · WAGON
+              </span>
+              <span class="rounded bg-volt px-2.5 py-1 font-mono text-[10px] font-extrabold uppercase text-obsidian group-hover:bg-white transition-colors">
+                CLICK TO OPEN STUDIO &rarr;
+              </span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

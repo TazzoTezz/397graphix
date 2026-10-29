@@ -1,0 +1,408 @@
+---
+---
+
+<section id="sign-simulator" class="py-20 sm:py-28 border-t border-white/[0.1] bg-[#0D0F14] relative overflow-hidden">
+  <div class="bg-grid-pattern pointer-events-none absolute inset-0 opacity-50"></div>
+
+  <div class="container-wrap relative z-10">
+    <div class="max-w-3xl mb-10">
+      <span class="eyebrow-badge mb-3">LIVE 3D &amp; LED HALO WALL STUDIO</span>
+      <h2 class="font-display text-3xl sm:text-5xl text-white">
+        DESIGN YOUR <span class="text-volt">3D &amp; LED SIGN.</span>
+      </h2>
+      <p class="mt-2.5 text-sm sm:text-base text-gray-400">
+        Type your business name and tagline below, test 3D face finishes, dial in any LED halo colour with the live colour picker, and switch reception wall surfaces.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+      <!-- Left Column: Customizer Controls -->
+      <div class="lg:col-span-5 rounded-md border border-[#2C3342] bg-[#13161F] p-5 sm:p-7 flex flex-col justify-between space-y-5">
+        <div class="space-y-5">
+          <!-- 01. Brand Text & Subline Inputs -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label for="sim-text-input" class="block text-xs font-mono font-bold uppercase tracking-wider text-volt mb-1.5">
+                01. Primary Sign Text
+              </label>
+              <input
+                id="sim-text-input"
+                type="text"
+                maxlength="20"
+                value="397 GRAPHIX"
+                placeholder="YOUR BRAND..."
+                class="w-full rounded border border-[#363E4F] bg-[#0A0C10] px-3.5 py-2.5 font-heading text-base font-bold text-white uppercase tracking-wider focus:border-volt focus:outline-none"
+              />
+            </div>
+            <div>
+              <label for="sim-sub-input" class="block text-xs font-mono font-bold uppercase tracking-wider text-gray-300 mb-1.5">
+                Sub-line (Optional)
+              </label>
+              <input
+                id="sim-sub-input"
+                type="text"
+                maxlength="32"
+                value="WRAPS · SIGNAGE · FIT-OUTS"
+                placeholder="OPTIONAL TAGLINE..."
+                class="w-full rounded border border-[#363E4F] bg-[#0A0C10] px-3.5 py-2.5 font-mono text-xs text-white uppercase tracking-wider focus:border-volt focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <!-- 02. Lettering Font Picker -->
+          <div>
+            <span class="block text-xs font-mono font-bold uppercase tracking-wider text-gray-300 mb-2">
+              02. Lettering Font Style
+            </span>
+            <div class="grid grid-cols-3 gap-1.5" role="group" aria-label="Select 3D sign font style">
+              <button
+                type="button"
+                data-sim-font="wide"
+                class="sim-font-btn ui-btn is-active !px-2 !py-2 !text-[11px]"
+              >
+                Wide Block
+              </button>
+              <button
+                type="button"
+                data-sim-font="italic"
+                class="sim-font-btn ui-btn !px-2 !py-2 !text-[11px] italic"
+              >
+                Speed Italic
+              </button>
+              <button
+                type="button"
+                data-sim-font="condensed"
+                class="sim-font-btn ui-btn !px-2 !py-2 !text-[11px]"
+              >
+                Tall Trade
+              </button>
+              <button
+                type="button"
+                data-sim-font="clean"
+                class="sim-font-btn ui-btn !px-2 !py-2 !text-[11px]"
+              >
+                Clean Sans
+              </button>
+              <button
+                type="button"
+                data-sim-font="serif"
+                class="sim-font-btn ui-btn !px-2 !py-2 !text-[11px]"
+                style="font-family: Georgia, serif;"
+              >
+                Classic Serif
+              </button>
+              <button
+                type="button"
+                data-sim-font="mono"
+                class="sim-font-btn ui-btn !px-2 !py-2 !text-[11px]"
+              >
+                Tech Mono
+              </button>
+            </div>
+          </div>
+
+          <!-- 03. 3D Standoff Depth -->
+          <div>
+            <span class="block text-xs font-mono font-bold uppercase tracking-wider text-gray-300 mb-2">
+              03. 3D Extrusion &amp; Standoff Depth
+            </span>
+            <div class="grid grid-cols-3 gap-2">
+              <button
+                type="button"
+                data-sim-depth="1"
+                class="sim-depth-btn ui-btn !px-2 !py-2 !text-[11px]"
+              >
+                10mm Flat Cut
+              </button>
+              <button
+                type="button"
+                data-sim-depth="2"
+                class="sim-depth-btn ui-btn is-active !px-2 !py-2 !text-[11px]"
+              >
+                25mm 3D Block
+              </button>
+              <button
+                type="button"
+                data-sim-depth="3"
+                class="sim-depth-btn ui-btn !px-2 !py-2 !text-[11px]"
+              >
+                45mm Deep Halo
+              </button>
+            </div>
+          </div>
+
+          <!-- 04. 3D Face Material Finish -->
+          <div>
+            <span class="block text-xs font-mono font-bold uppercase tracking-wider text-gray-300 mb-2">
+              04. 3D Face Material Finish
+            </span>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              <button
+                type="button"
+                data-sim-finish="acrylic"
+                class="sim-finish-btn ui-btn is-active !px-2 !py-2 !text-[11px]"
+              >
+                Gloss White
+              </button>
+              <button
+                type="button"
+                data-sim-finish="carbon"
+                class="sim-finish-btn ui-btn !px-2 !py-2 !text-[11px]"
+              >
+                Matte Black
+              </button>
+              <button
+                type="button"
+                data-sim-finish="steel"
+                class="sim-finish-btn ui-btn !px-2 !py-2 !text-[11px]"
+              >
+                Brushed Steel
+              </button>
+              <button
+                type="button"
+                data-sim-finish="gold"
+                class="sim-finish-btn ui-btn !px-2 !py-2 !text-[11px]"
+              >
+                Brushed Brass
+              </button>
+            </div>
+            <div class="mt-2 flex items-center justify-between rounded border border-[#2C3342] bg-[#161A24] px-3 py-1.5">
+              <span class="text-[11px] font-mono font-bold uppercase text-gray-300">
+                Or Custom Letter Face Colour:
+              </span>
+              <label
+                class="inline-flex items-center gap-1.5 rounded border border-[#363E4F] bg-[#1E2330] px-2.5 py-1 text-[11px] font-mono font-bold uppercase text-white cursor-pointer hover:border-volt"
+                title="Pick any custom 3D letter face colour"
+              >
+                <input
+                  id="sim-custom-face-color"
+                  type="color"
+                  value="#FFFFFF"
+                  class="h-4 w-4 cursor-pointer border-0 bg-transparent p-0"
+                />
+                <span>Custom Face</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- 05. LED Halo Colour Swatches + Custom Picker + Intensity Slider -->
+          <div class="rounded border border-[#2C3342] bg-[#0A0C10] p-4 space-y-3.5">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <span class="text-xs font-mono font-bold uppercase tracking-wider text-volt">
+                05. LED Halo Colour &amp; Brightness
+              </span>
+              <span id="sim-led-name" class="text-xs font-mono uppercase text-gray-300">
+                CRIMSON NEON (#E11D48)
+              </span>
+            </div>
+
+            <!-- Swatches + Color Picker -->
+            <div class="flex flex-wrap items-center gap-2.5">
+              <button
+                type="button"
+                data-led-hex="#E11D48"
+                data-led-label="Crimson Neon"
+                aria-label="Crimson Neon"
+                class="sim-color-swatch h-7 w-7 rounded border-2 border-white bg-[#E11D48] scale-110 transition-transform"
+              ></button>
+              <button
+                type="button"
+                data-led-hex="#FFB443"
+                data-led-label="3000K Warm Gold"
+                aria-label="3000K Warm Gold"
+                class="sim-color-swatch h-7 w-7 rounded border border-white/40 bg-[#FFB443] hover:scale-110 transition-transform"
+              ></button>
+              <button
+                type="button"
+                data-led-hex="#FFFFFF"
+                data-led-label="4500K Pure White"
+                aria-label="4500K Pure White"
+                class="sim-color-swatch h-7 w-7 rounded border border-white/40 bg-[#FFFFFF] hover:scale-110 transition-transform"
+              ></button>
+              <button
+                type="button"
+                data-led-hex="#38BDF8"
+                data-led-label="6000K Ice Blue"
+                aria-label="6000K Ice Blue"
+                class="sim-color-swatch h-7 w-7 rounded border border-white/40 bg-[#38BDF8] hover:scale-110 transition-transform"
+              ></button>
+              <button
+                type="button"
+                data-led-hex="#A855F7"
+                data-led-label="Ultraviolet"
+                aria-label="Ultraviolet"
+                class="sim-color-swatch h-7 w-7 rounded border border-white/40 bg-[#A855F7] hover:scale-110 transition-transform"
+              ></button>
+              <button
+                type="button"
+                data-led-hex="#10B981"
+                data-led-label="Emerald LED"
+                aria-label="Emerald LED"
+                class="sim-color-swatch h-7 w-7 rounded border border-white/40 bg-[#10B981] hover:scale-110 transition-transform"
+              ></button>
+              <button
+                type="button"
+                data-led-hex="#FF5500"
+                data-led-label="Amber Neon"
+                aria-label="Amber Neon"
+                class="sim-color-swatch h-7 w-7 rounded border border-white/40 bg-[#FF5500] hover:scale-110 transition-transform"
+              ></button>
+
+              <!-- Custom Colour Input -->
+              <label
+                class="inline-flex items-center gap-2 rounded border border-[#363E4F] bg-[#1E2330] px-3 py-1.5 text-xs font-mono font-bold uppercase text-white cursor-pointer hover:border-volt"
+              >
+                <input
+                  id="sim-custom-color"
+                  type="color"
+                  value="#E11D48"
+                  class="h-4 w-4 cursor-pointer border-0 bg-transparent p-0"
+                />
+                <span>Custom RGB</span>
+              </label>
+            </div>
+
+            <!-- LED Brightness / Dimmer Slider -->
+            <div class="pt-1">
+              <div class="flex items-center justify-between text-xs font-mono uppercase text-gray-300 mb-1.5">
+                <span>Halo Dimmer (0% = Unlit 3D)</span>
+                <span id="sim-dimmer-val" class="text-volt font-bold">100% BRIGHTNESS</span>
+              </div>
+              <input
+                id="sim-dimmer"
+                type="range"
+                min="0"
+                max="100"
+                value="100"
+                aria-label="LED Halo Brightness"
+                class="w-full accent-[#E11D48] cursor-pointer h-2 rounded bg-[#1E2330]"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-2">
+          <a
+            id="sim-quote-btn"
+            href="/contact?service=led-fixtures&tier=Custom%203D%20%2B%20LED%20Halo%20Sign#quote"
+            class="btn-primary w-full"
+          >
+            <span>Quote This Custom Sign</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Live Architectural Reception Wall Stage -->
+      <div
+        id="sim-wall"
+        class="lg:col-span-7 relative min-h-[380px] sm:min-h-[460px] rounded-md border border-[#2C3342] bg-[#08090C] flex flex-col justify-between p-5 sm:p-8 overflow-hidden select-none transition-colors duration-500"
+      >
+        <!-- Wall Texture Layers -->
+        <div
+          id="sim-wall-slats"
+          hidden
+          class="pointer-events-none absolute inset-0 opacity-45"
+          style="background: repeating-linear-gradient(90deg, #14161d 0px, #14161d 18px, #07080a 18px, #07080a 26px);"
+        ></div>
+
+        <div
+          id="sim-wall-moss"
+          hidden
+          class="pointer-events-none absolute inset-0 opacity-50"
+          style="background: radial-gradient(circle at 20% 30%, #1d3b1a 0%, #0d1f0c 50%, #071206 100%);"
+        ></div>
+
+        <!-- Dynamic LED Halo Wall Radial Backlight -->
+        <div
+          id="sim-wall-glow"
+          class="pointer-events-none absolute inset-0 transition-all duration-300"
+          style="background: radial-gradient(circle at 50% 50%, rgba(225, 29, 72, 0.3) 0%, rgba(225, 29, 72, 0.1) 42%, transparent 72%);"
+        ></div>
+
+        <!-- Top Bar: Wall Surface Selector -->
+        <div class="relative z-10 flex flex-wrap items-center justify-between gap-3 border-b border-white/[0.1] pb-3.5">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="text-xs font-mono font-bold uppercase text-gray-300 mr-1">Wall Surface:</span>
+            <button
+              type="button"
+              data-sim-wall="slate"
+              class="sim-wall-btn ui-btn is-active !px-3 !py-1.5 !text-xs"
+            >
+              Matte Slate
+            </button>
+            <button
+              type="button"
+              data-sim-wall="slats"
+              class="sim-wall-btn ui-btn !px-3 !py-1.5 !text-xs"
+            >
+              Timber Slats
+            </button>
+            <button
+              type="button"
+              data-sim-wall="moss"
+              class="sim-wall-btn ui-btn !px-3 !py-1.5 !text-xs"
+            >
+              Moss Feature Wall
+            </button>
+            <label
+              class="inline-flex items-center gap-1.5 rounded border border-[#363E4F] bg-[#1E2330] px-2.5 py-1.5 text-xs font-mono font-bold uppercase text-white cursor-pointer hover:border-volt"
+              title="Pick any custom wall paint colour"
+            >
+              <input
+                id="sim-custom-wall-color"
+                type="color"
+                value="#08090C"
+                class="h-4 w-4 cursor-pointer border-0 bg-transparent p-0"
+              />
+              <span>Custom Wall</span>
+            </label>
+          </div>
+          <span id="sim-spec-readout" class="text-xs font-mono text-volt font-bold uppercase">
+            GLOSS WHITE (25MM) + CRIMSON NEON
+          </span>
+        </div>
+
+        <!-- Center Stage: 3D Extruded Sign Output + Subline -->
+        <div class="relative z-10 my-auto py-10 flex flex-col items-center justify-center text-center">
+          <div
+            id="sim-backing-frame"
+            class="px-6 py-6 sm:px-10 sm:py-9 rounded border border-white/[0.14] bg-obsidian/50 backdrop-blur-[2px] transition-all duration-300 max-w-full"
+            style="box-shadow: 0 0 40px rgba(225, 29, 72, 0.26), inset 0 0 20px rgba(225, 29, 72, 0.1);"
+          >
+            <div
+              id="sim-sign-output"
+              class="font-display text-3xl sm:text-5xl xl:text-6xl tracking-tight transition-all duration-200 break-words leading-tight"
+              style="
+                color: #FFFFFF;
+                text-shadow:
+                  1px 1px 0 #cbd5e1,
+                  2px 2px 0 #94a3b8,
+                  3px 3px 0 #64748b,
+                  4px 4px 0 #475569,
+                  5px 5px 0 #1e293b,
+                  0 0 25px rgba(225, 29, 72, 0.9),
+                  0 0 65px rgba(225, 29, 72, 0.55);
+              "
+            >
+              397 GRAPHIX
+            </div>
+            <div
+              id="sim-sub-output"
+              class="mt-3 font-mono text-xs sm:text-sm font-bold tracking-[0.22em] uppercase text-gray-200 transition-all duration-200"
+              style="text-shadow: 0 0 14px rgba(225, 29, 72, 0.8);"
+            >
+              WRAPS · SIGNAGE · FIT-OUTS
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Technical Spec Bar -->
+        <div class="relative z-10 flex flex-wrap items-center justify-between gap-2 border-t border-white/[0.1] pt-3 text-xs font-mono text-gray-400">
+          <span>CNC ROUTED 3D ACRYLIC / ACM</span>
+          <span>12V/24V CONCEALED TRANSFORMER · WLG INSTALL</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

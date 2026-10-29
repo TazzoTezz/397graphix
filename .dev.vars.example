@@ -1,0 +1,6 @@
+# Copy to .dev.vars for local testing with: npx wrangler pages dev public
+# .dev.vars is git-ignored. Never commit real keys.
+RESEND_API_KEY=re_xxxxxxxxxxxx
+TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA
+QUOTE_TO=ryan@397graphix.co.nz
+QUOTE_FROM=397 Graphix Website <website@397graphix.co.nz>

@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import CoverageConfigurator from '../components/CoverageConfigurator.astro';
+import SignageSimulator from '../components/SignageSimulator.astro';
+---
+
+<BaseLayout
+  title="Interactive Vehicle Wrap & Signage Studio | 397 Graphix Wellington"
+  description="Design your own custom vehicle wrap, fleet livery, office glass frosting, or 3D LED halo sign online with the 397 Graphix Interactive Design Studio."
+  canonicalPath="studio"
+  currentPage="/studio"
+>
+  <PageHeader
+    eyebrow="397 GRAPHIX // INTERACTIVE DESIGN LAB"
+    title="CUSTOM WRAP & SIGNAGE STUDIO."
+    description="Test wrap patterns, vinyl finishes, and colours on a Ute, Van, or Wagon—upload your own logo, drag your signwriting into place, download a PNG proof, or send your design straight to Ryan for a quote."
+  />
+
+  <CoverageConfigurator />
+
+  <SignageSimulator />
+</BaseLayout>
+
