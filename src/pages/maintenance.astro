@@ -1,0 +1,127 @@
+---
+import '../styles/global.css';
+import { SITE } from '../data/site';
+---
+
+<!doctype html>
+<html lang="en-NZ" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Studio Upgrade in Progress | {SITE.name}</title>
+    <meta
+      name="description"
+      content="397 Graphix is currently updating our online studio. For vehicle wraps, commercial signage, and office frosting in Wellington, call Ryan on 022 500 3904."
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#07080B" />
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
+    <link
+      rel="preload"
+      href="/assets/fonts/archivo-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+  </head>
+
+  <body class="min-h-screen flex flex-col justify-between bg-obsidian text-gray-100 antialiased selection:bg-volt selection:text-white relative overflow-hidden">
+    <!-- Subtle Studio Background Grid & Livery Stripes -->
+    <div class="bg-grid-pattern pointer-events-none absolute inset-0 opacity-50"></div>
+    <div class="livery-stripes pointer-events-none absolute top-0 right-0 h-full w-1/2 opacity-35"></div>
+    <div
+      class="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 h-[420px] w-[420px] rounded-full bg-volt/[0.08] blur-[130px]"
+    ></div>
+
+    <!-- Top Brand Bar -->
+    <header class="relative z-10 border-b border-white/[0.1] bg-obsidian/80 backdrop-blur-md">
+      <div class="container-wrap flex h-20 items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <img
+            src="/assets/img/logo.png"
+            alt="397 Graphix"
+            width="124"
+            height="60"
+            class="h-10 w-auto object-contain"
+          />
+          <span class="hidden sm:inline-block rounded border border-white/15 bg-white/[0.04] px-2 py-0.5 text-[11px] font-mono uppercase tracking-wider text-gray-300">
+            WLG · NZ
+          </span>
+        </div>
+
+        <a
+          href={SITE.tel}
+          class="inline-flex items-center gap-2 rounded border border-volt/50 bg-volt/10 px-3.5 py-2 text-xs font-mono font-bold uppercase tracking-wider text-white hover:bg-volt hover:border-volt transition-colors"
+        >
+          <span class="h-2 w-2 rounded-full bg-volt animate-pulse"></span>
+          <span>Call Direct: {SITE.phone}</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Maintenance Card -->
+    <main class="relative z-10 flex-1 flex items-center justify-center py-16 px-4">
+      <div class="max-w-2xl w-full rounded-md border border-[#2C3342] bg-[#11141D]/95 p-7 sm:p-12 shadow-2xl text-center">
+        <div class="inline-flex items-center justify-center mb-6">
+          <span class="eyebrow-badge">SYSTEM STATUS // STUDIO UPGRADE IN PROGRESS</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-5xl text-white tracking-tight uppercase">
+          WE’RE TUNING THE <span class="text-volt">DIGITAL STUDIO.</span>
+        </h1>
+
+        <p class="mt-4 text-sm sm:text-base text-gray-300 leading-relaxed max-w-xl mx-auto">
+          Our website is temporarily offline while we roll out new interactive vehicle wrap and signage tools. <strong class="text-white">Our Wellington workshop and install crew are operating as normal.</strong>
+        </p>
+
+        <!-- Direct Contact Actions -->
+        <div class="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3.5">
+          <a href={SITE.tel} class="btn-primary text-sm sm:text-base">
+            <span>Call Ryan: {SITE.phone}</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+          <a href={`mailto:${SITE.email}?subject=Quote%20Enquiry%20-%20397%20Graphix`} class="btn-secondary text-sm sm:text-base">
+            <span>Email: {SITE.email}</span>
+          </a>
+        </div>
+
+        <!-- Capabilities Strip -->
+        <div class="mt-10 pt-6 border-t border-white/[0.1] grid grid-cols-2 sm:grid-cols-3 gap-3 text-left text-xs font-mono">
+          <div class="rounded border border-white/[0.08] bg-[#0B0D13] px-3 py-2.5">
+            <span class="text-volt font-bold block">// 01</span>
+            <span class="text-gray-200 font-bold">Vehicle Wraps</span>
+          </div>
+          <div class="rounded border border-white/[0.08] bg-[#0B0D13] px-3 py-2.5">
+            <span class="text-volt font-bold block">// 02</span>
+            <span class="text-gray-200 font-bold">Fleet Signage</span>
+          </div>
+          <div class="rounded border border-white/[0.08] bg-[#0B0D13] px-3 py-2.5">
+            <span class="text-volt font-bold block">// 03</span>
+            <span class="text-gray-200 font-bold">Window Frosting</span>
+          </div>
+          <div class="rounded border border-white/[0.08] bg-[#0B0D13] px-3 py-2.5">
+            <span class="text-volt font-bold block">// 04</span>
+            <span class="text-gray-200 font-bold">External Signage</span>
+          </div>
+          <div class="rounded border border-white/[0.08] bg-[#0B0D13] px-3 py-2.5">
+            <span class="text-volt font-bold block">// 05</span>
+            <span class="text-gray-200 font-bold">3D Lettering</span>
+          </div>
+          <div class="rounded border border-white/[0.08] bg-[#0B0D13] px-3 py-2.5">
+            <span class="text-volt font-bold block">// 06</span>
+            <span class="text-gray-200 font-bold">LED Light Fixtures</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Minimal Footer -->
+    <footer class="relative z-10 border-t border-white/[0.08] bg-obsidian/90 py-5 text-center text-xs font-mono text-gray-500">
+      <div class="container-wrap flex flex-col sm:flex-row items-center justify-between gap-2">
+        <span>&copy; {new Date().getFullYear()} {SITE.name}. All rights reserved.</span>
+        <span>{SITE.location} · {SITE.phone}</span>
+      </div>
+    </footer>
+  </body>
+</html>
+
