@@ -127,7 +127,7 @@ const FALLBACK_MAINTENANCE_HTML = `<!doctype html>
   <footer>
     <div class="wrap">
       <span>&copy; 397 Graphix. All rights reserved.</span>
-      <span>Wellington Region, New Zealand · 022 500 3904</span>
+      <span>Website and IT support provided by <a href="https://synctech.co.nz" target="_blank" rel="noopener noreferrer" style="color:#E5E7EB;text-decoration:underline;font-weight:700;">Sync Tech NZ</a></span>
     </div>
   </footer>
 </body>
